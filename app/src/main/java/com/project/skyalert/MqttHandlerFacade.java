@@ -1,13 +1,12 @@
 package com.project.skyalert;
 
+import android.widget.TextView;
+
 public class MqttHandlerFacade extends MqttHandler {
     public void connect(String brokerUrl, String clientId) {
         super.connect(brokerUrl, clientId);
-        System.out.println("Connected to broker: " + brokerUrl);
-    }
-
-    public void subscribe(String topic) {
-        super.subscribe(topic);
-        System.out.println("Subscribed to topic: " + topic);
+        super.subscribe("nina");
+        //add to observer
+        //call the ui manager to handle ui update
     }
 }

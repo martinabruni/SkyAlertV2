@@ -1,13 +1,15 @@
 package com.project.skyalert;
 
 import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Screen2Activity extends AppCompatActivity {
     private TextView feedbackTextbox;
-    private TextView alertsTextbox;
+    private LinearLayout alertsScrollView;
     private MqttHandler mqttHandlerFacade;
 
     @Override
@@ -17,7 +19,7 @@ public class Screen2Activity extends AppCompatActivity {
 
         // Initialize UI components
         feedbackTextbox = findViewById(R.id.feedbackTextView);
-        alertsTextbox = findViewById(R.id.alertsTextView);
+        alertsScrollView = findViewById(R.id.layout);
 
         // Get the IP_ADDRESS passed from MainActivity
         String ipAddress = getIntent().getStringExtra("IP_ADDRESS");
@@ -29,10 +31,10 @@ public class Screen2Activity extends AppCompatActivity {
         mqttHandlerFacade = new MqttHandlerFacade();
         mqttHandlerFacade.connect(brokerUrl, "ANDROID_CLIENT");
 
-        mqttHandlerFacade.subscribe("nina");
-
         mqttHandlerFacade.addObserver((topic, message) -> {
-            runOnUiThread(() -> alertsTextbox.setText("Topic: " + topic + "\nMessage: " + message));
+            TextView newAlert = new TextView(this);
+            newAlert.setText("Topic: " + topic + "\nMessage: " + message);
+            runOnUiThread(() -> alertsScrollView.addView(newAlert, 0));
         });
 
         feedbackTextbox.setText("Connected");
