@@ -5,39 +5,44 @@ import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
 import org.eclipse.paho.mqttv5.client.MqttCallback;
 import org.eclipse.paho.mqttv5.client.MqttDisconnectResponse;
-import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
 import org.eclipse.paho.mqttv5.common.MqttMessage;
 import org.eclipse.paho.mqttv5.common.MqttException;
+import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
 import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
 
-public class MqttHandler {
+import java.util.ArrayList;
+import java.util.List;
 
+public class MqttHandler {
     private MqttClient client;
-    private MessageListener messageListener;
+    private List<MessageListener> listeners = new ArrayList<>();
 
     public interface MessageListener {
         void onMessageReceived(String topic, String message);
     }
 
-    public void setMessageListener(MessageListener listener) {
-        this.messageListener = listener;
+    public void addObserver(MessageListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeObserver(MessageListener listener) {
+        listeners.remove(listener);
+    }
+
+    protected void notifyObservers(String topic, String message) {
+        for (MessageListener listener : listeners) {
+            listener.onMessageReceived(topic, message);
+        }
     }
 
     public void connect(String brokerUrl, String clientId) {
         try {
-            // Set up the persistence layer
-            MemoryPersistence persistence = new MemoryPersistence();
+            client = new MqttClient(brokerUrl, clientId, new MemoryPersistence());
+            MqttConnectionOptions options = new MqttConnectionOptions();
+            options.setCleanStart(true);
+            options.setSessionExpiryInterval(0L);
 
-            // Initialize the MQTT client
-            client = new MqttClient(brokerUrl, clientId, persistence);
-
-            // Set up the connection options
-            MqttConnectionOptions connectOptions = new MqttConnectionOptions();
-            connectOptions.setCleanStart(true);  // Replaces setCleanSession in MQTTv5
-            connectOptions.setSessionExpiryInterval(0L);  // Optional: can be set as needed
-
-            // Set the callback to handle messages
             client.setCallback(new MqttCallback() {
                 @Override
                 public void disconnected(MqttDisconnectResponse disconnectResponse) {
@@ -50,10 +55,8 @@ public class MqttHandler {
                 }
 
                 @Override
-                public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    if (messageListener != null) {
-                        messageListener.onMessageReceived(topic, new String(message.getPayload()));
-                    }
+                public void messageArrived(String topic, MqttMessage message) {
+                    notifyObservers(topic, new String(message.getPayload()));
                 }
 
                 @Override
@@ -70,30 +73,10 @@ public class MqttHandler {
                 public void authPacketArrived(int reasonCode, MqttProperties properties) {
 
                 }
+
             });
 
-            // Connect to the broker
-            client.connect(connectOptions);
-
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void disconnect() {
-        try {
-            client.disconnect();
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void publish(String topic, String message) {
-        try {
-            MqttMessage mqttMessage = new MqttMessage(message.getBytes());
-            mqttMessage.setQos(1);
-            mqttMessage.setRetained(false);
-            client.publish(topic, mqttMessage);
+            client.connect(options);
         } catch (MqttException e) {
             e.printStackTrace();
         }
