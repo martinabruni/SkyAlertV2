@@ -1,5 +1,7 @@
 package com.project.skyalert;
 
+import android.content.Context;
+
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
@@ -36,7 +38,7 @@ public class MqttHandler {
         }
     }
 
-    public void connect(String brokerUrl, String clientId) {
+    public void connect(String brokerUrl, String clientId, Context context) {
         try {
             client = new MqttClient(brokerUrl, clientId, new MemoryPersistence());
             MqttConnectionOptions options = new MqttConnectionOptions();

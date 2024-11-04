@@ -2,7 +2,6 @@ package com.project.skyalert;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,11 +28,10 @@ public class Screen2Activity extends AppCompatActivity {
 
         // Use MqttHandlerFacade to manage MQTT connections
         mqttHandlerFacade = new MqttHandlerFacade();
-        mqttHandlerFacade.connect(brokerUrl, "ANDROID_CLIENT");
+        mqttHandlerFacade.connect(brokerUrl, "ANDROID_CLIENT", this);
 
         mqttHandlerFacade.addObserver((topic, message) -> {
-            TextView newAlert = new TextView(this);
-            newAlert.setText("Topic: " + topic + "\nMessage: " + message);
+            TextView newAlert = UIManager.newTextView(this, "Topic: " + topic + "\nMessage: " + message);
             runOnUiThread(() -> alertsScrollView.addView(newAlert, 0));
         });
 
