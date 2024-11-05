@@ -3,6 +3,7 @@ package com.project.skyalert;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Screen2Activity extends AppCompatActivity {

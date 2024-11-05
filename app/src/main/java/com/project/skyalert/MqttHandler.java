@@ -1,6 +1,7 @@
 package com.project.skyalert;
 
 import android.content.Context;
+
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
@@ -11,6 +12,10 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
 import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -19,6 +24,7 @@ public class MqttHandler {
     private MqttClient client;
     private final List<MessageListener> listeners = new CopyOnWriteArrayList<>();
     private final NotificationHelper notificationHelper;
+    private JSONObject lastMessage;
 
     public interface MessageListener {
         void onMessageReceived(String topic, String message);
@@ -42,7 +48,7 @@ public class MqttHandler {
         for (MessageListener listener : listeners) {
             listener.onMessageReceived(topic, message);
         }
-        notificationHelper.sendNotification("Sky Alert", "Topic: " + topic + "\nMessage: " + message);
+        notificationHelper.sendNotification("Sky Alert", message);
     }
 
     public void connect(String brokerUrl, String clientId, Context context) {
@@ -66,7 +72,17 @@ public class MqttHandler {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) {
                     String payload = new String(message.getPayload());
-                    notifyObservers(topic, payload);
+                    JSONObject msg;
+                    try {
+                        msg = new JSONObject(payload);
+                        if (lastMessage == null || !msg.optString("date_local", "").equals(lastMessage.optString("date_local", ""))) {
+                            payload = handleIncomingMessage(topic, payload);
+                            notifyObservers(topic, payload);
+                        }
+                        lastMessage = msg;
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
                 @Override
@@ -109,4 +125,32 @@ public class MqttHandler {
             e.printStackTrace();
         }
     }
+
+
+    private String handleIncomingMessage(String topic, String payload) {
+        try {
+            JSONObject message = new JSONObject(payload);
+            String name = message.optString("name", "N/A");
+            String description = message.optString("description", "N/A");
+            String dateLocal = message.optString("date_local", "");
+
+            // Format date if it exists
+            String formattedDate = "N/A";
+            if (!dateLocal.isEmpty()) {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm");
+                Date date = inputFormat.parse(dateLocal);
+                formattedDate = outputFormat.format(date);
+            }
+
+            // Construct the formatted payload
+            String formattedPayload = "Topic: " + topic + "\nName: " + name + "\nDescription: " + description + "\nDate: " + formattedDate;
+
+            return formattedPayload;
+        } catch (Exception e) {
+            e.printStackTrace(); // Log any exceptions
+            return "Invalid message format.";
+        }
+    }
+
 }

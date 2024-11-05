@@ -23,9 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         connectionResult = findViewById(R.id.connectionResult);
         Button connectButton = findViewById(R.id.button);
         connectButton.setOnClickListener(this);
-
-        NotificationHelper notificationHelper = new NotificationHelper(this);
-        mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
     }
 
     @Override
@@ -34,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (mqttHandlerFacade != null) {
             mqttHandlerFacade.disconnect();
+            setConnectionResultMessage("Disconnected");
         }
     }
 
@@ -41,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         String ipAddress = this.ipAddress.getText().toString();
         try {
+            NotificationHelper notificationHelper = new NotificationHelper(this);
+            mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
             mqttHandlerFacade.validateConnection(connectionResult, ipAddress, this);
             setConnectionResultMessage("Connected");
             Intent intent = new Intent(this, Screen2Activity.class);

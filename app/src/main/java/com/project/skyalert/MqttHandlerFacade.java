@@ -28,18 +28,19 @@ public class MqttHandlerFacade extends MqttHandler {
         return instance;
     }
 
-    public void validateConnection(TextView component, String ipAddress, Context context){
+    public void validateConnection(TextView component, String ipAddress, Context context) {
         if (!isValidIpAddress(ipAddress)) {
             throw new RuntimeException("IP address not valid");
         } else {
             try {
                 String brokerUrl = "tcp://" + ipAddress + ":1883";
                 connectAndSubscribe(brokerUrl, clientId, context);
-            } catch (Exception e){
+            } catch (Exception e) {
                 throw new RuntimeException("Connection to the broker failed");
             }
         }
     }
+
     private void connectAndSubscribe(String brokerUrl, String clientId, Context context) {
         connect(brokerUrl, clientId, context);
         subscribe("nina");
