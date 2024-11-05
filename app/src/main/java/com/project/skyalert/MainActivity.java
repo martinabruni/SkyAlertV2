@@ -29,6 +29,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mqttHandlerFacade != null) {
+            mqttHandlerFacade.disconnect();
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         String ipAddress = this.ipAddress.getText().toString();
         try {
@@ -42,13 +51,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (mqttHandlerFacade != null) {
-//            mqttHandlerFacade.disconnect();
-//        }
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mqttHandlerFacade != null) {
+            mqttHandlerFacade.disconnect();
+        }
+    }
 
     private void setConnectionResultMessage(String msg) {
         this.connectionResult.setText(msg);

@@ -25,11 +25,11 @@ public class Screen2Activity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (mqttHandlerFacade != null) {
-//            mqttHandlerFacade.disconnect();
-//        }
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mqttHandlerFacade != null) {
+            mqttHandlerFacade.disconnect();
+        }
+    }
 }
