@@ -7,9 +7,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Screen2Activity extends AppCompatActivity {
-    private TextView feedbackTextbox;
     private LinearLayout alertsScrollView;
-    private MqttHandler mqttHandlerFacade;
+    private MqttHandlerFacade mqttHandlerFacade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,24 +16,23 @@ public class Screen2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_screen2);
 
         // Initialize UI components
-        feedbackTextbox = findViewById(R.id.feedbackTextView);
         alertsScrollView = findViewById(R.id.layout);
 
-        // Get the IP_ADDRESS passed from MainActivity
-        String ipAddress = getIntent().getStringExtra("IP_ADDRESS");
-        String brokerUrl = "tcp://" + ipAddress + ":1883";
-
-        feedbackTextbox.setText("Connecting to broker " + brokerUrl);
-
         // Use MqttHandlerFacade to manage MQTT connections
-        mqttHandlerFacade = new MqttHandlerFacade();
-        mqttHandlerFacade.connect(brokerUrl, "ANDROID_CLIENT", this);
-
+        mqttHandlerFacade = MqttHandlerFacade.getInstance();
+        mqttHandlerFacade.setContext(this); // Set context for notifications
         mqttHandlerFacade.addObserver((topic, message) -> {
             TextView newAlert = UIManager.newTextView(this, "Topic: " + topic + "\nMessage: " + message);
             runOnUiThread(() -> alertsScrollView.addView(newAlert, 0));
         });
+    }
 
-        feedbackTextbox.setText("Connected");
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mqttHandlerFacade != null) {
+            mqttHandlerFacade.disconnect();
+        }
     }
 }
