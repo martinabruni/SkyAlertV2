@@ -28,12 +28,12 @@ public class MqttHandlerFacade extends MqttHandler {
         return instance;
     }
 
-    public void validateConnection(TextView component, String ipAddress, Context context) {
+    public void validateConnection(TextView component, String ipAddress, String port, Context context) {
         if (!isValidIpAddress(ipAddress)) {
             throw new RuntimeException("IP address not valid");
         } else {
             try {
-                String brokerUrl = "tcp://" + ipAddress + ":1883";
+                String brokerUrl = "tcp://" + ipAddress + ":" + port;
                 connectAndSubscribe(brokerUrl, clientId, context);
             } catch (Exception e) {
                 throw new RuntimeException("Connection to the broker failed");
