@@ -1,10 +1,6 @@
 package com.project.skyalert;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
-import androidx.core.app.NotificationCompat;
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
@@ -20,18 +16,16 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MqttHandler {
-    private static final String CHANNEL_ID = "mqtt_notifications_channel";
     private MqttClient client;
     private final List<MessageListener> listeners = new CopyOnWriteArrayList<>();
-    private Context context;
+    private final NotificationHelper notificationHelper;
 
     public interface MessageListener {
         void onMessageReceived(String topic, String message);
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-        createNotificationChannel();
+    public MqttHandler(NotificationHelper notificationHelper) {
+        this.notificationHelper = notificationHelper;
     }
 
     public void addObserver(MessageListener listener) {
@@ -48,41 +42,10 @@ public class MqttHandler {
         for (MessageListener listener : listeners) {
             listener.onMessageReceived(topic, message);
         }
-        sendNotification("Sky Alert", "Topic: " + topic + "\nMessage: " + message);
-    }
-
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(
-                    CHANNEL_ID,
-                    "MQTT Notifications",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel.setDescription("Channel for MQTT message notifications");
-            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-            if (notificationManager != null) {
-                notificationManager.createNotificationChannel(channel);
-            }
-        }
-    }
-
-    private void sendNotification(String title, String message) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setContentTitle(title)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentText(message)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
-
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (notificationManager != null) {
-            notificationManager.notify((int) System.currentTimeMillis(), builder.build());
-        }
+        notificationHelper.sendNotification("Sky Alert", "Topic: " + topic + "\nMessage: " + message);
     }
 
     public void connect(String brokerUrl, String clientId, Context context) {
-        this.context = context;
-        createNotificationChannel();
         try {
             client = new MqttClient(brokerUrl, clientId, new MemoryPersistence());
             MqttConnectionOptions options = new MqttConnectionOptions();
