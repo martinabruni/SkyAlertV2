@@ -23,5 +23,9 @@
     <string name="subscribe">subscribe</string>
 
     <string name="telescopio_description">icona_telescopio</string>
-    <string name="contentDescription">Button</string>
+    <string name="button">Button</string>
+    <string name="app_subscribe">SUBSCRIBE</string>
+    <string name="remove">remove</string>
+    <string name="nina2">Nina</string>
+    <string name="broker">Broker Topic</string>
 </resources>
