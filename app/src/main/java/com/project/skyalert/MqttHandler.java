@@ -1,6 +1,7 @@
 package com.project.skyalert;
 
 import android.content.Context;
+import android.util.EventLogTags;
 
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttClient;
@@ -12,6 +13,7 @@ import org.eclipse.paho.mqttv5.common.MqttException;
 import org.eclipse.paho.mqttv5.client.persist.MemoryPersistence;
 import org.eclipse.paho.mqttv5.common.MqttSubscription;
 import org.eclipse.paho.mqttv5.common.packet.MqttProperties;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
@@ -19,6 +21,7 @@ import java.util.Date;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 
 public class MqttHandler {
     private MqttClient client;
@@ -126,8 +129,19 @@ public class MqttHandler {
         }
     }
 
+    public boolean hasErrorList(String payload) {
+        try {
+            JSONObject message = new JSONObject(payload);
+            return message.has("error_list") && message.getJSONArray("error_list").length() > 0;
 
-    private String handleIncomingMessage(String topic, String payload) {
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public String handleIncomingMessage(String topic, String payload) {
         try {
             JSONObject message = new JSONObject(payload);
             String name = message.optString("name", "N/A");
@@ -143,14 +157,28 @@ public class MqttHandler {
                 formattedDate = outputFormat.format(date);
             }
 
-            // Construct the formatted payload
-            String formattedPayload = "Topic: " + topic + "\nName: " + name + "\nDescription: " + description + "\nDate: " + formattedDate;
+            boolean isError = hasErrorList(payload);
 
+            String formattedPayload;
+
+            if (isError) {
+                String reason = "N/A";
+                if (message.has("error_list")) {
+                    JSONArray errorList = message.getJSONArray("error_list");
+                    if (errorList.length() > 0) {
+                        reason = errorList.getJSONObject(0).optString("Reason", "No reason provided");
+                    }
+                }
+                formattedPayload = "ERROR\nName: "+ name + "\nDescription: " + description + "\nTime: " + formattedDate + "\nReason: " + reason;
+            } else {
+                formattedPayload = "Info\nName: ";
+            }
             return formattedPayload;
         } catch (Exception e) {
-            e.printStackTrace(); // Log any exceptions
+            e.printStackTrace();
             return "Invalid message format.";
         }
     }
-
 }
+
+

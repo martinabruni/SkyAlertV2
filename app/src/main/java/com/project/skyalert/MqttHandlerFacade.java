@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.UUID;
 
 public class MqttHandlerFacade extends MqttHandler {
@@ -55,4 +57,5 @@ public class MqttHandlerFacade extends MqttHandler {
         String ipPattern = "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$";
         return ipAddress != null && ipAddress.matches(ipPattern);
     }
+
 }
