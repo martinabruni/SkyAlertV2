@@ -36,8 +36,9 @@
         android:layout_gravity="center"
         android:background="@drawable/buttonstart"
         android:fontFamily="@font/alegreya_sans"
-        android:text="START"
+        android:text="@string/button_start"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:visibility="visible" />
 </LinearLayout>
