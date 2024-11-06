@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">SkyAlert</string>
+    <string name="app_name">Skyalert</string>
+    <string name="button_start">START</string>
+
+    <string name="app_broker">Broker</string>
+
+    <string name="ip_address">Broker IP Address : </string>
+    <string name="hintaddress"> Inserisci l indirizzo ip  </string>
+    <string name="port">Port : </string>
+    <string name="hintport"> Inserisci la porta  </string>
+    <string name="button_connect">Connect</string>
+
+    <string name="filter">filter</string>
+    <string name="app_alert">ALERT</string>
+    <string name="message">Oh noooo ti è esploso il telescopio</string>
+    <string name="alertD">ALERT</string>
+
+    <string name="data">1:37:06 - 24/10/2024</string>
+    <string name="button_disconnect">Disconnect</string>
+    <string name="nina">NINA</string>
+
+    <string name="dashboardSelected">dashboard selected</string>
+    <string name="subscribe">subscribe</string>
+
+    <string name="telescopio_description">icona_telescopio</string>
 </resources>
