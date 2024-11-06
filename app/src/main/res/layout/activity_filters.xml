@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/filtersPanel"
     android:layout_width="254dp"
     android:layout_height="348dp"
@@ -127,5 +128,71 @@
         android:textSize="17sp"
         android:layout_marginTop="16dp"
         android:layout_marginLeft="20sp"/>
-    <!-- data inizio, data fine, orario inizio, orario fine -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:fontFamily="@font/inter"
+            android:text="Date:"
+            android:textColor="#1A2E3A" />
+
+        <EditText
+            android:id="@+id/fromDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:textSize="15sp"
+            android:hint="dd/mm/yyyy"
+            android:inputType="none"
+            tools:ignore="TextFields" />
+
+        <ImageButton
+            android:id="@+id/datePickerButtonFrom"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:src="@drawable/calendario" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="0"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:textColor="#1A2E3A"
+            android:fontFamily="@font/inter"/>
+
+        <EditText
+            android:id="@+id/fromTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="00:00"
+            android:textSize="15dp"
+            android:inputType="none"
+            android:focusable="false" />
+
+        <ImageButton
+            android:id="@+id/timePickerButtonFrom"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:src="@drawable/orologio" />
+    </LinearLayout>
 </LinearLayout>
