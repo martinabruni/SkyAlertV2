@@ -79,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:background="@drawable/rounded_corners"
-                    android:clipToOutline="true"
                     android:contentDescription="@string/dashboardSelected"
                     android:src="@drawable/subscribe_button" />
 

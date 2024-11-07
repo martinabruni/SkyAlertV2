@@ -18,23 +18,22 @@
             android:id="@+id/filtersTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filters"
+            android:text="@string/filtri"
             android:fontFamily="@font/italiana"
             android:textColor="#1A2E3A"
-            android:textSize="35sp"
+            android:textSize="30sp"
             android:layout_gravity="start" />
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your topic:"
+        android:text="@string/topic"
         android:fontFamily="@font/inter"
         android:textStyle="bold"
         android:textColor="#1A2E3A"
-        android:textSize="17sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="20sp"/>
+        android:textSize="15sp"
+        android:layout_marginStart="20sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,17 +47,17 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Macchina 1"
-            android:textSize="13sp"
+            android:text="@string/macchina1"
+            android:textSize="12sp"
             android:fontFamily="@font/inter"/>
 
         <ImageButton
             android:id="@+id/circleButton1"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/circle_button"
-            android:contentDescription="@string/contentDescription"
+            android:contentDescription="@string/bottone"
             android:padding="0dp"
             android:scaleType="centerInside" />
     </LinearLayout>
@@ -75,17 +74,17 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Macchina 2"
-            android:textSize="13sp"
+            android:text="@string/macchina2"
+            android:textSize="12sp"
             android:fontFamily="@font/inter"/>
 
         <ImageButton
             android:id="@+id/circleButton2"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/circle_button"
-            android:contentDescription="@string/contentDescription"
+            android:contentDescription="@string/bottone"
             android:padding="0dp"
             android:scaleType="centerInside" />
     </LinearLayout>
@@ -102,17 +101,17 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Macchina 3"
-            android:textSize="13sp"
+            android:text="@string/macchina3"
+            android:textSize="12sp"
             android:fontFamily="@font/inter"/>
 
         <ImageButton
             android:id="@+id/circleButton3"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/circle_button"
-            android:contentDescription="@string/contentDescription"
+            android:contentDescription="@string/bottone"
             android:padding="0dp"
             android:scaleType="centerInside" />
     </LinearLayout>
@@ -121,45 +120,44 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date"
+        android:text="@string/from"
         android:fontFamily="@font/inter"
         android:textStyle="bold"
         android:textColor="#1A2E3A"
-        android:textSize="17sp"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="20sp"/>
+        android:textSize="15sp"
+        android:layout_marginStart="20sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp">
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:fontFamily="@font/inter"
-            android:text="Date:"
+            android:textSize="12sp"
+            android:text="@string/date"
             android:textColor="#1A2E3A" />
 
         <EditText
-            android:id="@+id/fromDate"
+            android:id="@+id/dateTextFrom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="false"
-            android:textSize="15sp"
-            android:hint="dd/mm/yyyy"
+            android:textSize="12sp"
+            android:hint="@string/dataformato"
             android:inputType="none"
             tools:ignore="TextFields" />
 
         <ImageButton
-            android:id="@+id/datePickerButtonFrom"
+            android:id="@+id/dateImageFrom"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@null"
+            android:contentDescription="@string/bottone"
             android:src="@drawable/calendario" />
     </LinearLayout>
 
@@ -167,32 +165,109 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp">
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_weight="0"
             android:layout_height="wrap_content"
-            android:text="Time:"
+            android:text="@string/time"
+            android:textSize="12sp"
             android:textColor="#1A2E3A"
             android:fontFamily="@font/inter"/>
 
         <EditText
-            android:id="@+id/fromTime"
+            android:id="@+id/timeTextFrom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="00:00"
-            android:textSize="15dp"
+            android:hint="@string/timeformato"
+            android:textSize="12sp"
             android:inputType="none"
             android:focusable="false" />
 
         <ImageButton
-            android:id="@+id/timePickerButtonFrom"
+            android:id="@+id/timeImageFrom"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@null"
+            android:contentDescription="@string/bottone"
+            android:src="@drawable/orologio" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to"
+        android:fontFamily="@font/inter"
+        android:textStyle="bold"
+        android:textColor="#1A2E3A"
+        android:textSize="15sp"
+        android:layout_marginStart="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:fontFamily="@font/inter"
+            android:textSize="12sp"
+            android:text="@string/date"
+            android:textColor="#1A2E3A" />
+
+        <EditText
+            android:id="@+id/dateTextTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:textSize="12sp"
+            android:hint="@string/dataformato"
+            android:inputType="none"
+            tools:ignore="TextFields" />
+
+        <ImageButton
+            android:id="@+id/dateImageTo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="@string/bottone"
+            android:src="@drawable/calendario" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_weight="0"
+            android:layout_height="wrap_content"
+            android:text="@string/time"
+            android:textSize="12sp"
+            android:textColor="#1A2E3A"
+            android:fontFamily="@font/inter"/>
+
+        <EditText
+            android:id="@+id/timeTextTo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/timeformato"
+            android:textSize="12sp"
+            android:inputType="none"
+            android:focusable="false" />
+
+        <ImageButton
+            android:id="@+id/timeImageTo"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@null"
+            android:contentDescription="@string/bottone"
             android:src="@drawable/orologio" />
     </LinearLayout>
 </LinearLayout>
