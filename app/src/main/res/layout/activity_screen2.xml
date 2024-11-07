@@ -25,8 +25,6 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,6 +60,8 @@
             android:layout_gravity="end"
             android:contentDescription="@string/settings"
             android:src="@drawable/settings" />
+
+
     </LinearLayout>
 
         <View
@@ -140,6 +140,12 @@
             </LinearLayout>
         </ScrollView>
 
+        <ImageButton
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:src="@drawable/trash"/>
     </LinearLayout>
 
     <LinearLayout
