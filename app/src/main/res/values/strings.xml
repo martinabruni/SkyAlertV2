@@ -5,9 +5,9 @@
     <string name="app_broker">Broker</string>
 
     <string name="ip_address">Broker IP Address : </string>
-    <string name="hintaddress"> Inserisci l indirizzo ip  </string>
+    <string name="hintaddress"> ie 10.10.14.105  </string>
     <string name="port">Port : </string>
-    <string name="hintport"> Inserisci la porta  </string>
+    <string name="hintport"> ie 1883  </string>
     <string name="button_connect">Connect</string>
 
     <string name="filter">filter</string>
