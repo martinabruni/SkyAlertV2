@@ -28,4 +28,16 @@
     <string name="remove">remove</string>
     <string name="nina2">Nina</string>
     <string name="broker">Broker Topic</string>
+    <string name="bottone">bottone</string>
+    <string name="filtri">Filters</string>
+    <string name="topic">Your topic:</string>
+    <string name="macchina1">Macchina 1</string>
+    <string name="macchina2">Macchina 2</string>
+    <string name="macchina3">Macchina 3</string>
+    <string name="from">From</string>
+    <string name="date">Date:</string>
+    <string name="dataformato">dd/mm/yyyy</string>
+    <string name="time">Time:</string>
+    <string name="timeformato">00:00</string>
+    <string name="to">To</string>
 </resources>
