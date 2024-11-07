@@ -21,6 +21,17 @@
 
     <string name="dashboardSelected">dashboard selected</string>
     <string name="subscribe">subscribe</string>
+    <string name="settings">settings</string>
+
+    <string name="settings_title">Settings</string>
+
+    <string name="button_save">Save</string>
+    <string name="button_exit">Exit</string>
+
+    <string name="changeD">Change Broker</string>
+    <string name="addTopic">Add Topic</string>
+    <string name="notification">Notification</string>
+    <string name="aboutapp">About App</string>
 
     <string name="telescopio_description">icona_telescopio</string>
 </resources>

@@ -26,17 +26,43 @@
         android:padding="10dp">
 
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/filterIcon"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="start"
+            android:layout_weight="1"
+            android:contentDescription="@string/filter"
+            android:src="@drawable/filter" />
+
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
+            android:textAlignment="center"
+
             android:fontFamily="@font/italiana"
             android:text="@string/app_alert"
+            android:layout_weight="6"
             android:textColor="@android:color/white"
             android:textSize="36sp"
             android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/settingsIcon"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:contentDescription="@string/settings"
+            android:src="@drawable/settings" />
+    </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -44,15 +70,6 @@
             android:layout_marginTop="0dp"
             android:layout_marginBottom="20dp"
             android:background="@android:color/white" />
-
-        <ImageView
-            android:id="@+id/filterIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="start"
-            android:contentDescription="@string/filter"
-            android:src="@drawable/filter" />
-
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
