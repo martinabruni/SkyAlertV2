@@ -38,6 +38,7 @@
         android:fontFamily="@font/alegreya_sans"
         android:text="@string/button_start"
         android:textAllCaps="false"
+        android:gravity="center"
         android:textColor="@android:color/white"
         android:textSize="25sp"
         android:visibility="visible" />
