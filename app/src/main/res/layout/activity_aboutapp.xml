@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/star_background"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/telescopeImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@string/telescopio_description"
+        android:src="@drawable/foto_telescopio" />
+
+    <TextView
+        android:id="@+id/aboutAppTitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/italiana"
+        android:text="@string/aboutapp"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="1sp"
+        android:background="@drawable/container_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10sp"
+            android:layout_weight="1"
+            android:padding="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/guide"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:text="@string/guideM"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:text="@string/guideM1"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:text="@string/guideM2"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/guideM3"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:text="@string/guideM4"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10sp"
+                    android:text="@string/starting"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/startingM"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10sp"
+                    android:text="@string/subscribeTopic"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/subscribeTopicM"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:textStyle="bold"
+                    android:layout_marginTop="10sp"
+                    android:text="@string/dashboardGuide"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/dashboardGuideM"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="139dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/alegreya_sans"
+                    android:text="@string/dashboardGuideM1"
+                    android:textAlignment="center"
+                    android:textColor="#083360"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>
