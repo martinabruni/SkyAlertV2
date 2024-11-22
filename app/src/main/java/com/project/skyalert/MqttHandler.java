@@ -1,7 +1,6 @@
 package com.project.skyalert;
 
 import android.content.Context;
-import android.util.EventLogTags;
 
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttClient;
@@ -18,10 +17,8 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
 
 public class MqttHandler {
     private MqttClient client;
@@ -75,32 +72,35 @@ public class MqttHandler {
                 @Override
                 public void messageArrived(String topic, MqttMessage message) {
                     String payload = new String(message.getPayload());
-                    JSONObject msg;
                     try {
-                        msg = new JSONObject(payload);
-                        if (lastMessage == null || !msg.optString("date_local", "").equals(lastMessage.optString("date_local", ""))) {
-                            payload = handleIncomingMessage(topic, payload);
+
+                        boolean isError = hasErrorList(payload);
+
+                        if (isError) {
+                            String formattedMessage = handleIncomingMessage(topic, payload);
+                            notifyObservers(topic, formattedMessage);
+                        } else {
+
                             notifyObservers(topic, payload);
                         }
-                        lastMessage = msg;
                     } catch (Exception e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 }
 
                 @Override
                 public void deliveryComplete(IMqttToken token) {
-                    // Optional: Handle message delivery completion
+
                 }
 
                 @Override
                 public void connectComplete(boolean reconnect, String serverURI) {
-                    // Optional: Handle logic when connection is complete
+
                 }
 
                 @Override
                 public void authPacketArrived(int reasonCode, MqttProperties properties) {
-                    // Optional: Handle auth packet arrival
+
                 }
             });
 
@@ -132,23 +132,22 @@ public class MqttHandler {
     public boolean hasErrorList(String payload) {
         try {
             JSONObject message = new JSONObject(payload);
+            // Verifica se il messaggio contiene "error_list" e se ha elementi
             return message.has("error_list") && message.getJSONArray("error_list").length() > 0;
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-
     public String handleIncomingMessage(String topic, String payload) {
         try {
+
             JSONObject message = new JSONObject(payload);
             String name = message.optString("name", "N/A");
             String description = message.optString("description", "N/A");
             String dateLocal = message.optString("date_local", "");
 
-            // Format date if it exists
             String formattedDate = "N/A";
             if (!dateLocal.isEmpty()) {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -159,7 +158,7 @@ public class MqttHandler {
 
             boolean isError = hasErrorList(payload);
 
-            String formattedPayload;
+            StringBuilder formattedPayload = new StringBuilder();
 
             if (isError) {
                 String reason = "N/A";
@@ -169,11 +168,13 @@ public class MqttHandler {
                         reason = errorList.getJSONObject(0).optString("Reason", "No reason provided");
                     }
                 }
-                formattedPayload = "ERROR\nName: "+ name + "\nDescription: " + description + "\nTime: " + formattedDate + "\nReason: " + reason;
-            } else {
-                formattedPayload = "Info\nName: ";
+                formattedPayload.append("ERROR\n")
+                        .append("Name: ").append(name).append("\n")
+                        .append("Description: ").append(description).append("\n")
+                        .append("Time: ").append(formattedDate).append("\n")
+                        .append("Reason: ").append(reason);
             }
-            return formattedPayload;
+            return formattedPayload.toString();
         } catch (Exception e) {
             e.printStackTrace();
             return "Invalid message format.";

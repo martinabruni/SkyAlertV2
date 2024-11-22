@@ -1,0 +1,9 @@
+diff a/app/src/main/java/com/project/skyalert/MqttHandler.java b/app/src/main/java/com/project/skyalert/MqttHandler.java	(rejected hunks)
+@@ -1,6 +1,7 @@
+ package com.project.skyalert;
+ 
+ import android.content.Context;
++import android.util.EventLogTags;
+ 
+ import org.eclipse.paho.mqttv5.client.IMqttToken;
+ import org.eclipse.paho.mqttv5.client.MqttClient;
