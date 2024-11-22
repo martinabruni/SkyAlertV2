@@ -4,10 +4,10 @@
 
     <string name="app_broker">Broker</string>
 
-    <string name="ip_address">Broker IP Address : </string>
-    <string name="hintaddress"> ie 10.10.14.105  </string>
-    <string name="port">Port : </string>
-    <string name="hintport"> ie 1883  </string>
+    <string name="ip_address">Broker IP Address :</string>
+    <string name="hintaddress">ie 10.10.14.105</string>
+    <string name="port">Port :</string>
+    <string name="hintport">ie 1883</string>
     <string name="button_connect">Connect</string>
 
     <string name="filter">filter</string>
@@ -18,6 +18,7 @@
     <string name="data">1:37:06 - 24/10/2024</string>
     <string name="button_disconnect">Disconnect</string>
     <string name="nina">NINA</string>
+    <string name="nina2">Nina</string>
 
     <string name="dashboardSelected">dashboard selected</string>
     <string name="subscribe">subscribe</string>
@@ -31,6 +32,12 @@
     <string name="changeD">Change Broker</string>
     <string name="addTopic">Add Topic</string>
     <string name="notification">Notification</string>
+    <string name="sound1">Sound 1</string>
+    <string name="sound2">Sound 2</string>
+    <string name="sound3">Sound 3</string>
+    <string name="audio">Audio</string>
+    <string name="audio_icon_description">Audio Description</string>
+    <string name="fileaudio">File Audio</string>
     <string name="aboutapp">About App</string>
 
     <string name="guide">SkyAlert Guide</string>
@@ -41,13 +48,29 @@
     <string name="guideM4"> - Description</string>
 
     <string name="starting">Starting the App</string>
-    <string name="startingM">he user interface is very intuitive and user-friendly. Simply click the "Start" button on the launch screen to access the connection screen, where you can enter the MQTT broker details (IP address and port) to connect. Once connected, click “Connect” to be redirected to the dashboard, where alerts for the various topics you’re subscribed to will be listed.</string>
+    <string name="startingM">The user interface is very intuitive and user-friendly. Simply click the "Start" button on the launch screen to access the connection screen, where you can enter the MQTT broker details (IP address and port) to connect. Once connected, click “Connect” to be redirected to the dashboard, where alerts for the various topics you’re subscribed to will be listed.</string>
+
     <string name="telescopio_description">icona_telescopio</string>
+    <string name="button">Button</string>
+    <string name="remove">remove</string>
+    <string name="broker">Broker Topic</string>
+    <string name="bottone">bottone</string>
+    <string name="filtri">Filters</string>
+    <string name="topic">Your topic:</string>
+    <string name="macchina1">Macchina 1</string>
+    <string name="macchina2">Macchina 2</string>
+    <string name="macchina3">Macchina 3</string>
+    <string name="from">From</string>
+    <string name="date">Date:</string>
+    <string name="dataformato">dd/mm/yyyy</string>
+    <string name="time">Time:</string>
+    <string name="timeformato">00:00</string>
+    <string name="to">To</string>
 
     <string name="subscribeTopic">Subscribing to a Topic</string>
     <string name="subscribeTopicM">At the bottom right, there is a "Subscribe" button that will take you to the topic subscription page. Once on the page, simply enter the name of the desired topic in the search bar to subscribe, and it will immediately be added to the list on the same page. At the bottom left, there is a "Dashboard" button to return to the alerts page.</string>
 
     <string name="dashboardGuide">Dashboard</string>
     <string name="dashboardGuideM">The dashboard is the main alert viewing area where alerts related to the subscribed topics are displayed, sent from the MQTT broker. At the top left, there is a filter button that allows you to select and filter alerts by the topic you want to view and/or by date.</string>
-    <string name="dashboardGuideM1">In the center, alerts are displayed in order from most recent to least recent, allowing the latest errors to always be shown at the top of the list. Further down, below the alerts, there is a  "Disconnect"  button to terminate the connection between the app and the MQTT broker and return to the connection screen.</string>
+    <string name="dashboardGuideM1">In the center, alerts are displayed in order from most recent to least recent, allowing the latest errors to always be shown at the top of the list. Further down, below the alerts, there is a "Disconnect" button to terminate the connection between the app and the MQTT broker and return to the connection screen.</string>
 </resources>

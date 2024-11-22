@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/star_background"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/telescopeImage"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/telescopio_description"
+        android:src="@drawable/foto_telescopio" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/container_background_notification"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notification"
+            android:textSize="30sp"
+            android:fontFamily="@font/italiana"
+            android:textStyle="bold"
+            android:textColor="#1A2E3A"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginVertical="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/alegreya_sans"
+                android:text="@string/sound1"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/buttonSound1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/sound_icon" />
+
+            <ImageButton
+                android:id="@+id/buttonNotification1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/radio_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/alegreya_sans"
+                android:text="@string/sound2"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/buttonSound2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/sound_icon" />
+
+            <ImageButton
+                android:id="@+id/buttonNotification2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/radio_button" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/alegreya_sans"
+                android:text="@string/sound3"
+                android:textColor="@color/grey"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/buttonSound3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/sound_icon" />
+
+            <ImageButton
+                android:id="@+id/buttonNotification3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/radio_button" />
+        </LinearLayout>
+
+        <!-- Sezione Aggiungi Audio -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/audio"
+            android:textSize="16sp"
+            android:fontFamily="@font/alegreya_sans"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:textColor="#1A2E3A"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/file_input_background"
+                android:padding="8dp"
+                android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/music_icon"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/audio_icon_description"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="24dp"
+                    android:background="@color/white"
+                    android:layout_marginHorizontal="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alegreya_sans"
+                android:text="@string/fileaudio"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+</LinearLayout>
