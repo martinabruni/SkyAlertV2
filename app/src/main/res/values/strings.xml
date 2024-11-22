@@ -40,4 +40,12 @@
     <string name="time">Time:</string>
     <string name="timeformato">00:00</string>
     <string name="to">To</string>
+
+    <string name="notification">Notification</string>
+    <string name="sound1">Sound 1</string>
+    <string name="sound2">Sound 2</string>
+    <string name="sound3">Sound 3</string>
+    <string name="audio">Add Sound from device:</string>
+    <string name="audio_icon_description">icone musica</string>
+    <string name="fileaudio">File audio</string>
 </resources>
