@@ -109,7 +109,6 @@
         android:background="@drawable/buttonstart"
         android:fontFamily="@font/alegreya_sans"
         android:text="@string/button_connect"
-        android:gravity="center"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="25sp" />
