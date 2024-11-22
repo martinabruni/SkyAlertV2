@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/italiana"
-            android:text="@string/app_subscribe"
+            android:text="@string/subscribe"
             android:textColor="@android:color/white"
             android:textSize="36sp"
             android:textStyle="bold" />
