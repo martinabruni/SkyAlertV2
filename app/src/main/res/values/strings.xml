@@ -4,10 +4,10 @@
 
     <string name="app_broker">Broker</string>
 
-    <string name="ip_address">Broker IP Address : </string>
-    <string name="hintaddress"> Inserisci l indirizzo ip  </string>
-    <string name="port">Port : </string>
-    <string name="hintport"> Inserisci la porta  </string>
+    <string name="ip_address">Broker IP Address :</string>
+    <string name="hintaddress">ie 10.10.14.105</string>
+    <string name="port">Port :</string>
+    <string name="hintport">ie 1883</string>
     <string name="button_connect">Connect</string>
 
     <string name="filter">filter</string>
@@ -18,15 +18,35 @@
     <string name="data">1:37:06 - 24/10/2024</string>
     <string name="button_disconnect">Disconnect</string>
     <string name="nina">NINA</string>
+    <string name="nina2">Nina</string>
 
     <string name="dashboardSelected">dashboard selected</string>
     <string name="subscribe">subscribe</string>
+    <string name="settings">settings</string>
+
+    <string name="settings_title">Settings</string>
+
+    <string name="button_save">Save</string>
+    <string name="button_exit">Exit</string>
+
+    <string name="changeD">Change Broker</string>
+    <string name="addTopic">Add Topic</string>
+    <string name="notification">Notification</string>
+    <string name="aboutapp">About App</string>
+
+    <string name="guide">SkyAlert Guide</string>
+    <string name="guideM">SkyAlert is an app designed for amateur and professional astronomers that allows you to constantly monitor your telescope and the NINA software through an MQTT broker and receive real-time alerts whenever errors occur. Each alert will provide specific details about the type of error detected by NINA during the sequence. Errors will be sent to an MQTT broker, which will send a local notification to the smartphone.</string>
+    <string name="guideM1">The message will include:</string>
+    <string name="guideM2"> - Topic</string>
+    <string name="guideM3"> - Name</string>
+    <string name="guideM4"> - Description</string>
+
+    <string name="starting">Starting the App</string>
+    <string name="startingM">The user interface is very intuitive and user-friendly. Simply click the "Start" button on the launch screen to access the connection screen, where you can enter the MQTT broker details (IP address and port) to connect. Once connected, click “Connect” to be redirected to the dashboard, where alerts for the various topics you’re subscribed to will be listed.</string>
 
     <string name="telescopio_description">icona_telescopio</string>
     <string name="button">Button</string>
-    <string name="app_subscribe">SUBSCRIBE</string>
     <string name="remove">remove</string>
-    <string name="nina2">Nina</string>
     <string name="broker">Broker Topic</string>
     <string name="bottone">bottone</string>
     <string name="filtri">Filters</string>
@@ -40,4 +60,11 @@
     <string name="time">Time:</string>
     <string name="timeformato">00:00</string>
     <string name="to">To</string>
+
+    <string name="subscribeTopic">Subscribing to a Topic</string>
+    <string name="subscribeTopicM">At the bottom right, there is a "Subscribe" button that will take you to the topic subscription page. Once on the page, simply enter the name of the desired topic in the search bar to subscribe, and it will immediately be added to the list on the same page. At the bottom left, there is a "Dashboard" button to return to the alerts page.</string>
+
+    <string name="dashboardGuide">Dashboard</string>
+    <string name="dashboardGuideM">The dashboard is the main alert viewing area where alerts related to the subscribed topics are displayed, sent from the MQTT broker. At the top left, there is a filter button that allows you to select and filter alerts by the topic you want to view and/or by date.</string>
+    <string name="dashboardGuideM1">In the center, alerts are displayed in order from most recent to least recent, allowing the latest errors to always be shown at the top of the list. Further down, below the alerts, there is a "Disconnect" button to terminate the connection between the app and the MQTT broker and return to the connection screen.</string>
 </resources>
