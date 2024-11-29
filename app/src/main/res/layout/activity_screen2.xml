@@ -32,33 +32,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/filterIcon"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
                 android:layout_gravity="start"
+                android:layout_weight="1"
                 android:contentDescription="@string/filter"
                 android:src="@drawable/filter" />
 
             <TextView
                 android:id="@+id/titleText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:textAlignment="center"
+
                 android:fontFamily="@font/italiana"
                 android:text="@string/app_alert"
+                android:layout_weight="6"
                 android:textColor="@android:color/white"
                 android:textSize="36sp"
                 android:textStyle="bold" />
-
             <ImageView
                 android:id="@+id/settingsIcon"
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
+                android:layout_weight="1"
                 android:layout_gravity="end"
                 android:contentDescription="@string/settings"
                 android:src="@drawable/settings" />
@@ -83,57 +85,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <!-- Example Alert Block -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/alertred"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:contentDescription="@string/alertD"
-                        android:src="@drawable/triangolo" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/data"
-                            android:textColor="@android:color/black"
-                            android:textSize="15sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/message"
-                            android:textColor="@android:color/black"
-                            android:textSize="16sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:layout_marginTop="4dp"
-                            android:background="@drawable/label_background_red"
-                            android:paddingHorizontal="15dp"
-                            android:paddingVertical="5dp"
-                            android:text="@string/nina"
-                            android:textColor="@android:color/white"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
@@ -176,7 +127,7 @@
         android:padding="8dp">
 
         <ImageButton
-            android:id="@+id/dashboardSbutton"
+            android:id="@+id/dashboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -184,7 +135,7 @@
             android:src="@drawable/dashboardselect" />
 
         <ImageButton
-            android:id="@+id/subscribebutton"
+            android:id="@+id/subscribePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
