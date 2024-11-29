@@ -15,6 +15,19 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    applicationVariants.all {
+        this.outputs
+            .map { it as com.android.build.gradle.internal.api.ApkVariantOutputImpl }
+            .forEach { output ->
+                val variant = this.buildType.name
+                var apkName =
+                    "SKYALERT" + "-" + this.versionName
+                if (variant.isNotEmpty()) apkName += "-$variant"
+                apkName += ".apk"
+                println("ApkName=$apkName ${this.buildType.name}")
+                output.outputFileName = apkName
+            }
+    }
 
     buildTypes {
         release {

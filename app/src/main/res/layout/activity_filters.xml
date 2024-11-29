@@ -52,10 +52,14 @@
             android:fontFamily="@font/inter"/>
 
         <ImageButton
-            android:id="@+id/buttonFilter1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/radio_button" />
+            android:id="@+id/circleButton1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_button"
+            android:contentDescription="@string/bottone"
+            android:padding="0dp"
+            android:scaleType="centerInside" />
     </LinearLayout>
 
     <LinearLayout
@@ -75,10 +79,14 @@
             android:fontFamily="@font/inter"/>
 
         <ImageButton
-            android:id="@+id/buttonFilter2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/radio_button" />
+            android:id="@+id/circleButton2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_button"
+            android:contentDescription="@string/bottone"
+            android:padding="0dp"
+            android:scaleType="centerInside" />
     </LinearLayout>
 
     <LinearLayout
@@ -98,10 +106,14 @@
             android:fontFamily="@font/inter"/>
 
         <ImageButton
-            android:id="@+id/buttonFilter3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/radio_button" />
+            android:id="@+id/circleButton3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle_button"
+            android:contentDescription="@string/bottone"
+            android:padding="0dp"
+            android:scaleType="centerInside" />
     </LinearLayout>
 
 

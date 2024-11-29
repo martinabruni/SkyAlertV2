@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.project.skyalert.MqttHandlerFacade;
 import com.project.skyalert.NotificationHelper;
 import com.project.skyalert.R;
-import com.project.skyalert.UIManager;
+import com.project.skyalert.ui.UIManager;
 
 public class Screen1Activity extends AppCompatActivity implements View.OnClickListener {
     private EditText ipAddress;
@@ -48,7 +48,7 @@ public class Screen1Activity extends AppCompatActivity implements View.OnClickLi
         try {
             NotificationHelper notificationHelper = new NotificationHelper(this);
             mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
-            mqttHandlerFacade.validateConnection(connectionResult, ipAddress, port, this);
+            mqttHandlerFacade.validateAndConnect(connectionResult, ipAddress, port, this);
             setConnectionResultMessage("Connected");
             UIManager.loadNextActivity(this, Screen2Activity.class);
         } catch (Exception e) {

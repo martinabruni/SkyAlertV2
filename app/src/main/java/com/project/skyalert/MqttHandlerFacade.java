@@ -1,21 +1,24 @@
 package com.project.skyalert;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.TextView;
 
-import org.json.JSONObject;
+import com.project.skyalert.ui.layouts.TopicItem;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class MqttHandlerFacade extends MqttHandler {
     private static MqttHandlerFacade instance;
-    private String clientId;
+    private List<TopicItem> topics;
+    private final String clientId;
 
     // Private constructor that passes the NotificationHelper to the superclass
     private MqttHandlerFacade(NotificationHelper notificationHelper) {
         super(notificationHelper);
         clientId = "android-" + UUID.randomUUID().toString();
+        topics = new ArrayList<>();
     }
 
     // Public method to provide access to the single instance with the dependency passed
@@ -30,27 +33,34 @@ public class MqttHandlerFacade extends MqttHandler {
         return instance;
     }
 
-    public void validateConnection(TextView component, String ipAddress, String port, Context context) {
+    public static MqttHandlerFacade getInstance() {
+        return instance;
+    }
+
+    public List<TopicItem> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<TopicItem> l) {
+        this.topics = l;
+    }
+
+    public void validateAndConnect(TextView component, String ipAddress, String port, Context context) {
         if (!isValidIpAddress(ipAddress)) {
             throw new RuntimeException("IP address not valid");
         } else {
             try {
                 String brokerUrl = "tcp://" + ipAddress + ":" + port;
-                connectAndSubscribe(brokerUrl, clientId, context);
+                connect(brokerUrl, clientId, context);
             } catch (Exception e) {
                 throw new RuntimeException("Connection to the broker failed");
             }
         }
     }
 
-    private void connectAndSubscribe(String brokerUrl, String clientId, Context context) {
-        connect(brokerUrl, clientId, context);
-        subscribe("nina");
-    }
-
-    public void connectAndSubscribe(String brokerUrl, String clientId, Context context, String topic) {
-        connect(brokerUrl, clientId, context);
-        subscribe(topic);
+    public void subscribe(String topic, TopicItem topicItem) {
+        super.subscribe(topic);
+        this.topics.add(topicItem);
     }
 
     private boolean isValidIpAddress(String ipAddress) {
