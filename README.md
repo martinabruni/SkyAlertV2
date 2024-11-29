@@ -122,8 +122,9 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 2. Checkout dev branch.
 3. Import the project into Android Studio.
 4. Configure the MQTT broker settings in the app.
-5. Build and run the app on an Android device.
-6. Allow notification on the app
+5. Build the app.
+6. Allow notification on the app.
+7. Run the app on an Android device.
 
 ---
 
