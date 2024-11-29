@@ -20,30 +20,66 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * The MqttHandler class provides functionality for connecting to an MQTT broker,
+ * subscribing to topics, and processing incoming messages.
+ */
 public class MqttHandler {
-    private MqttClient client;
-    private final List<MessageListener> listeners = new CopyOnWriteArrayList<>();
-    private final NotificationHelper notificationHelper;
-    private JSONObject lastMessage;
 
+    private MqttClient client; // The MQTT client instance
+    private final List<MessageListener> listeners = new CopyOnWriteArrayList<>(); // List of observers
+    private final NotificationHelper notificationHelper; // Helper for sending notifications
+    private JSONObject lastMessage; // Stores the last received message
+
+    /**
+     * Interface for observing MQTT message events.
+     */
     public interface MessageListener {
+        /**
+         * Called when a new MQTT message is received.
+         *
+         * @param topic   The topic of the received message.
+         * @param message The message payload.
+         */
         void onMessageReceived(String topic, String message);
     }
 
+    /**
+     * Constructor for MqttHandler.
+     *
+     * @param notificationHelper A helper for managing notifications.
+     */
     public MqttHandler(NotificationHelper notificationHelper) {
         this.notificationHelper = notificationHelper;
     }
 
+    /**
+     * Adds a new observer to listen for incoming MQTT messages.
+     *
+     * @param listener The listener to add.
+     */
     public void addObserver(MessageListener listener) {
         if (!listeners.contains(listener)) {
             listeners.add(listener);
         }
     }
 
+    /**
+     * Removes an existing observer from the list.
+     *
+     * @param listener The listener to remove.
+     */
     public void removeObserver(MessageListener listener) {
         listeners.remove(listener);
     }
 
+    /**
+     * Notifies all observers of a received message.
+     *
+     * @param topic   The topic of the message.
+     * @param message The message payload.
+     * @param isError Indicates if the message is an error.
+     */
     protected void notifyObservers(String topic, String message, Boolean isError) {
         for (MessageListener listener : listeners) {
             listener.onMessageReceived(topic, message);
@@ -51,9 +87,15 @@ public class MqttHandler {
         if (isError) {
             notificationHelper.sendNotification("Sky Alert", message);
         }
-
     }
 
+    /**
+     * Connects to an MQTT broker.
+     *
+     * @param brokerUrl The URL of the MQTT broker.
+     * @param clientId  A unique client identifier.
+     * @param context   The context for managing lifecycle events.
+     */
     public void connect(String brokerUrl, String clientId, Context context) {
         try {
             client = new MqttClient(brokerUrl, clientId, new MemoryPersistence());
@@ -76,14 +118,13 @@ public class MqttHandler {
                 public void messageArrived(String topic, MqttMessage message) {
                     String payload = new String(message.getPayload());
                     try {
-
                         boolean isError = hasErrorList(payload);
 
                         if (isError) {
                             String formattedMessage = handleIncomingMessage(topic, payload);
-                            notifyObservers(topic, formattedMessage,true);
+                            notifyObservers(topic, formattedMessage, true);
                         } else {
-                            notifyObservers(topic, payload,false);
+                            notifyObservers(topic, payload, false);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -92,17 +133,14 @@ public class MqttHandler {
 
                 @Override
                 public void deliveryComplete(IMqttToken token) {
-
                 }
 
                 @Override
                 public void connectComplete(boolean reconnect, String serverURI) {
-
                 }
 
                 @Override
                 public void authPacketArrived(int reasonCode, MqttProperties properties) {
-
                 }
             });
 
@@ -112,6 +150,11 @@ public class MqttHandler {
         }
     }
 
+    /**
+     * Subscribes to an MQTT topic.
+     *
+     * @param topic The topic to subscribe to.
+     */
     public void subscribe(String topic) {
         try {
             MqttSubscription subscription = new MqttSubscription(topic);
@@ -121,6 +164,9 @@ public class MqttHandler {
         }
     }
 
+    /**
+     * Disconnects from the MQTT broker.
+     */
     public void disconnect() {
         try {
             if (client != null && client.isConnected()) {
@@ -131,10 +177,15 @@ public class MqttHandler {
         }
     }
 
+    /**
+     * Checks if the payload contains an error list.
+     *
+     * @param payload The message payload.
+     * @return True if the payload contains an error list, false otherwise.
+     */
     public boolean hasErrorList(String payload) {
         try {
             JSONObject message = new JSONObject(payload);
-            // Verifica se il messaggio contiene "error_list" e se ha elementi
             return message.has("error_list") && message.getJSONArray("error_list").length() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,9 +193,15 @@ public class MqttHandler {
         }
     }
 
+    /**
+     * Handles incoming MQTT messages and formats error messages if present.
+     *
+     * @param topic   The topic of the message.
+     * @param payload The message payload.
+     * @return A formatted string representation of the message.
+     */
     public String handleIncomingMessage(String topic, String payload) {
         try {
-
             JSONObject message = new JSONObject(payload);
             String name = message.optString("name", "N/A");
             String description = message.optString("description", "N/A");
@@ -170,11 +227,7 @@ public class MqttHandler {
                         reason = errorList.getJSONObject(0).optString("Reason", "No reason provided");
                     }
                 }
-                formattedPayload.append("ERROR\n")
-                        .append("Name: ").append(name).append("\n")
-                        .append("Description: ").append(description).append("\n")
-                        .append("Time: ").append(formattedDate).append("\n")
-                        .append("Reason: ").append(reason);
+                formattedPayload.append("ERROR\n").append("Name: ").append(name).append("\n").append("Description: ").append(description).append("\n").append("Time: ").append(formattedDate).append("\n").append("Reason: ").append(reason);
             }
             return formattedPayload.toString();
         } catch (Exception e) {

@@ -19,30 +19,44 @@ import com.project.skyalert.ui.layouts.AlertItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Screen2Activity class manages the alerts displayed from MQTT messages
+ * and provides options for clearing alerts, navigating to subscription pages, and disconnecting.
+ */
 public class Screen2Activity extends AppCompatActivity implements View.OnClickListener {
-    private LinearLayout alertsScrollView;
-    private MqttHandlerFacade mqttHandlerFacade;
-    private final AppCompatActivity currentActivity = this;
 
+    private LinearLayout alertsScrollView; // Layout for displaying alerts
+    private MqttHandlerFacade mqttHandlerFacade; // MQTT handler for managing broker connections
+    private final AppCompatActivity currentActivity = this; // Reference to the current activity
+
+    /**
+     * Initializes the activity and sets up the UI components and MQTT observers.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down, this contains the saved data. Otherwise, it is null.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_screen2);
 
+        // Initialize UI components
         alertsScrollView = findViewById(R.id.layout);
         ImageButton clearButton = findViewById(R.id.clearButton);
         Button disconnectButton = findViewById(R.id.disconnectButton);
         ImageButton subscribePage = findViewById(R.id.subscribePage);
 
+        // Set click listeners for buttons
         clearButton.setOnClickListener(this);
         disconnectButton.setOnClickListener(this);
         subscribePage.setOnClickListener(this);
 
+        // Initialize MQTT handler
         NotificationHelper notificationHelper = new NotificationHelper(this);
-        mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
+        mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper);
 
-        // Add an observer for handling incoming MQTT messages
+        // Add an observer to handle incoming MQTT messages
         mqttHandlerFacade.addObserver((topic, message) -> {
+            // Define how the AlertItem data is bound to views
             ViewBinder<AlertItem> alertBinder = (view, elementData) -> {
                 TextView dataTextView = view.findViewById(R.id.dataTextView);
                 TextView messageTextView = view.findViewById(R.id.messageTextView);
@@ -52,12 +66,24 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
                 messageTextView.setText(elementData.getMessage());
                 topicTextView.setText(elementData.getTopic());
             };
+
+            // Create a new AlertItem for the received message
             AlertItem newAlert = new AlertItem("", message, topic);
 
-            runOnUiThread(() -> UIManager.displayElements(List.of(newAlert), alertsScrollView, this, R.layout.alert_item, alertBinder));
+            // Update the UI on the main thread
+            runOnUiThread(() -> UIManager.displayElements(
+                    List.of(newAlert),
+                    alertsScrollView,
+                    this,
+                    R.layout.alert_item,
+                    alertBinder
+            ));
         });
     }
 
+    /**
+     * Disconnects the MQTT handler and clears topics when the activity is destroyed.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -67,14 +93,23 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * Handles button click events.
+     *
+     * @param v The view that was clicked.
+     */
     @Override
     public void onClick(View v) {
         int id = v.getId();
+
         if (id == R.id.disconnectButton) {
+            // Disconnect and close the activity
             finish();
         } else if (id == R.id.clearButton) {
+            // Clear all alerts
             alertsScrollView.removeAllViewsInLayout();
         } else if (id == R.id.subscribePage) {
+            // Navigate to the subscription activity
             UIManager.loadNextActivity(currentActivity, SubscribeActivity.class);
         }
     }
