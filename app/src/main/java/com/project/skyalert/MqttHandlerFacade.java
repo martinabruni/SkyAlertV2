@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class MqttHandlerFacade extends MqttHandler {
     private static MqttHandlerFacade instance;
-    private final List<TopicItem> topics;
+    private List<TopicItem> topics;
     private final String clientId;
 
     // Private constructor that passes the NotificationHelper to the superclass
@@ -39,6 +39,10 @@ public class MqttHandlerFacade extends MqttHandler {
 
     public List<TopicItem> getTopics() {
         return topics;
+    }
+
+    public void setTopics(List<TopicItem> l) {
+        this.topics = l;
     }
 
     public void validateAndConnect(TextView component, String ipAddress, String port, Context context) {

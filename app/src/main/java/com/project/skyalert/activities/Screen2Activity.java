@@ -16,6 +16,7 @@ import com.project.skyalert.ui.UIManager;
 import com.project.skyalert.ui.ViewBinder;
 import com.project.skyalert.ui.layouts.AlertItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Screen2Activity extends AppCompatActivity implements View.OnClickListener {
@@ -62,6 +63,7 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         super.onDestroy();
         if (mqttHandlerFacade != null) {
             mqttHandlerFacade.disconnect();
+            mqttHandlerFacade.setTopics(new ArrayList<>());
         }
     }
 
