@@ -1,4 +1,4 @@
-package com.project.skyalert;
+package com.project.skyalert.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +7,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.project.skyalert.MqttHandlerFacade;
+import com.project.skyalert.NotificationHelper;
+import com.project.skyalert.R;
+import com.project.skyalert.UIManager;
 
 public class Screen1Activity extends AppCompatActivity implements View.OnClickListener {
     private EditText ipAddress;

@@ -1,4 +1,4 @@
-package com.project.skyalert;
+package com.project.skyalert.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.project.skyalert.R;
+import com.project.skyalert.UIManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
