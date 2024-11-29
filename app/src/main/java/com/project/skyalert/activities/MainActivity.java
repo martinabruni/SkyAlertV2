@@ -8,7 +8,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.skyalert.R;
-import com.project.skyalert.UIManager;
+import com.project.skyalert.ui.UIManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,6 +23,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        UIManager.loadNextActivity(this,Screen1Activity.class);
+        UIManager.loadNextActivity(this, Screen1Activity.class);
     }
 }

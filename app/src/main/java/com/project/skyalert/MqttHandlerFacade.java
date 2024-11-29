@@ -3,14 +3,16 @@ package com.project.skyalert;
 import android.content.Context;
 import android.widget.TextView;
 
+import com.project.skyalert.ui.layouts.TopicItem;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class MqttHandlerFacade extends MqttHandler {
     private static MqttHandlerFacade instance;
-    private List<String> topics;
-    private String clientId;
+    private final List<TopicItem> topics;
+    private final String clientId;
 
     // Private constructor that passes the NotificationHelper to the superclass
     private MqttHandlerFacade(NotificationHelper notificationHelper) {
@@ -30,11 +32,12 @@ public class MqttHandlerFacade extends MqttHandler {
         }
         return instance;
     }
-    public static MqttHandlerFacade getInstance(){
+
+    public static MqttHandlerFacade getInstance() {
         return instance;
     }
 
-    public List<String> getTopics(){
+    public List<TopicItem> getTopics() {
         return topics;
     }
 
@@ -50,14 +53,15 @@ public class MqttHandlerFacade extends MqttHandler {
             }
         }
     }
-    public void subscribe(String topic){
+
+    public void subscribe(String topic, TopicItem topicItem) {
         super.subscribe(topic);
-        this.topics.add(topic);
+        this.topics.add(topicItem);
     }
 
     private boolean isValidIpAddress(String ipAddress) {
         String ipPattern = "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$";
         return ipAddress != null && ipAddress.matches(ipPattern);
     }
-    
+
 }
