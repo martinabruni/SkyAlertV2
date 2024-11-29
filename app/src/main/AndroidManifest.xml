@@ -26,6 +26,7 @@
         </activity>
         <activity android:name=".activities.Screen1Activity" />
         <activity android:name=".activities.Screen2Activity" />
+        <activity android:name=".activities.SubscribeActivity" />
     </application>
 
 </manifest>

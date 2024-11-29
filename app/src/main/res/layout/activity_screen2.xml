@@ -176,7 +176,7 @@
         android:padding="8dp">
 
         <ImageButton
-            android:id="@+id/dashboardSbutton"
+            android:id="@+id/dashboardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -184,7 +184,7 @@
             android:src="@drawable/dashboardselect" />
 
         <ImageButton
-            android:id="@+id/subscribebutton"
+            android:id="@+id/subscribePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"

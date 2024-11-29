@@ -1,19 +1,22 @@
 package com.project.skyalert;
 
 import android.content.Context;
-import android.content.Intent;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class MqttHandlerFacade extends MqttHandler {
     private static MqttHandlerFacade instance;
+    private List<String> topics;
     private String clientId;
 
     // Private constructor that passes the NotificationHelper to the superclass
     private MqttHandlerFacade(NotificationHelper notificationHelper) {
         super(notificationHelper);
         clientId = "android-" + UUID.randomUUID().toString();
+        topics = new ArrayList<>();
     }
 
     // Public method to provide access to the single instance with the dependency passed
@@ -27,32 +30,34 @@ public class MqttHandlerFacade extends MqttHandler {
         }
         return instance;
     }
+    public static MqttHandlerFacade getInstance(){
+        return instance;
+    }
 
-    public void validateConnection(TextView component, String ipAddress, String port, Context context) {
+    public List<String> getTopics(){
+        return topics;
+    }
+
+    public void validateAndConnect(TextView component, String ipAddress, String port, Context context) {
         if (!isValidIpAddress(ipAddress)) {
             throw new RuntimeException("IP address not valid");
         } else {
             try {
                 String brokerUrl = "tcp://" + ipAddress + ":" + port;
-                connectAndSubscribe(brokerUrl, clientId, context);
+                connect(brokerUrl, clientId, context);
             } catch (Exception e) {
                 throw new RuntimeException("Connection to the broker failed");
             }
         }
     }
-
-    private void connectAndSubscribe(String brokerUrl, String clientId, Context context) {
-        connect(brokerUrl, clientId, context);
-        subscribe("nina");
-    }
-
-    public void connectAndSubscribe(String brokerUrl, String clientId, Context context, String topic) {
-        connect(brokerUrl, clientId, context);
-        subscribe(topic);
+    public void subscribe(String topic){
+        super.subscribe(topic);
+        this.topics.add(topic);
     }
 
     private boolean isValidIpAddress(String ipAddress) {
         String ipPattern = "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$";
         return ipAddress != null && ipAddress.matches(ipPattern);
     }
+    
 }

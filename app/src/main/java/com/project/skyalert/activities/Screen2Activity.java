@@ -1,5 +1,6 @@
 package com.project.skyalert.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +15,15 @@ import com.project.skyalert.NotificationHelper;
 import com.project.skyalert.R;
 import com.project.skyalert.UIManager;
 
+import java.util.List;
+
 public class Screen2Activity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout alertsScrollView;
     private ImageButton clearButton;
     private Button disconnectButton;
+    private ImageButton subscribePage;
     private MqttHandlerFacade mqttHandlerFacade;
+    private final AppCompatActivity currentActivity = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +33,19 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         alertsScrollView = findViewById(R.id.layout);
         clearButton = findViewById(R.id.clearButton);
         disconnectButton = findViewById(R.id.disconnectButton);
+        subscribePage = findViewById(R.id.subscribePage);
 
         clearButton.setOnClickListener(this);
         disconnectButton.setOnClickListener(this);
+        subscribePage.setOnClickListener(this);
 
         NotificationHelper notificationHelper = new NotificationHelper(this);
         mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
 
         // Add an observer for handling incoming MQTT messages
         mqttHandlerFacade.addObserver((topic, message) -> {
-            TextView newAlert = UIManager.newTextView(this, "Topic: " + topic + "\nMessage: " + message);
-            runOnUiThread(() -> alertsScrollView.addView(newAlert, 0));
+            runOnUiThread(() ->
+                    UIManager.displayElements(List.of("Topic: " + topic + "\nMessage: " + message), alertsScrollView, this));
         });
     }
 
@@ -57,6 +64,8 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
             finish();
         } else if (id == R.id.clearButton) {
             alertsScrollView.removeAllViewsInLayout();
+        } else if (id == R.id.subscribePage) {
+            UIManager.loadNextActivity(currentActivity, SubscribeActivity.class);
         }
     }
 }
