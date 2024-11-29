@@ -44,11 +44,14 @@ public class MqttHandler {
         listeners.remove(listener);
     }
 
-    protected void notifyObservers(String topic, String message) {
+    protected void notifyObservers(String topic, String message, Boolean isError) {
         for (MessageListener listener : listeners) {
             listener.onMessageReceived(topic, message);
         }
-        notificationHelper.sendNotification("Sky Alert", message);
+        if (isError) {
+            notificationHelper.sendNotification("Sky Alert", message);
+        }
+
     }
 
     public void connect(String brokerUrl, String clientId, Context context) {
@@ -78,10 +81,9 @@ public class MqttHandler {
 
                         if (isError) {
                             String formattedMessage = handleIncomingMessage(topic, payload);
-                            notifyObservers(topic, formattedMessage);
+                            notifyObservers(topic, formattedMessage,true);
                         } else {
-
-                            notifyObservers(topic, payload);
+                            notifyObservers(topic, payload,false);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
