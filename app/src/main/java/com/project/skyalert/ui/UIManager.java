@@ -15,7 +15,6 @@ import java.util.List;
  * and navigation between activities in the application.
  */
 public class UIManager {
-
     /**
      * Navigates from the current activity to the specified next activity.
      *
@@ -24,6 +23,19 @@ public class UIManager {
      */
     public static void loadNextActivity(AppCompatActivity currentActivity, Class<?> nextActivity) {
         Intent intent = new Intent(currentActivity, nextActivity);
+        currentActivity.startActivity(intent);
+    }
+
+    public static void loadNextActivityAndClear(AppCompatActivity currentActivity, Class<?> nextActivity) {
+        Intent intent = new Intent(currentActivity, nextActivity);
+        currentActivity.startActivity(intent);
+        currentActivity.finish();
+    }
+
+    public static void loadNextActivityAndClearStack(AppCompatActivity currentActivity, Class<?> nextActivity) {
+        Intent intent = new Intent(currentActivity, nextActivity);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         currentActivity.startActivity(intent);
     }
 

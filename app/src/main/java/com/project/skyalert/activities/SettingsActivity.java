@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.project.skyalert.MqttHandlerFacade;
 import com.project.skyalert.R;
 import com.project.skyalert.ui.UIManager;
 
@@ -23,12 +24,20 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
      *                           this contains the saved data. Otherwise, it is null.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // Initialize and set click listener for the "About App" button
+        // Initialize UI components
+        ImageButton changeBrokerButton = findViewById(R.id.changeBrokerButton);
+        ImageButton addTopicButton = findViewById(R.id.addTopicButton);
+        ImageButton notificationButton = findViewById(R.id.notificationButton);
         ImageButton aboutAppButton = findViewById(R.id.aboutAppButton);
+
+        // Set click listeners for buttons
+        changeBrokerButton.setOnClickListener(this);
+        addTopicButton.setOnClickListener(this);
+        notificationButton.setOnClickListener(this);
         aboutAppButton.setOnClickListener(this);
     }
 
@@ -40,7 +49,18 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.aboutAppButton) {
+        if (id == R.id.changeBrokerButton) {
+            //Disconnect from the broker
+            MqttHandlerFacade.getInstance().disconnect();
+            //Navigate to the "Screen1" activity and clear the stack of activities
+            UIManager.loadNextActivityAndClearStack(this, Screen1Activity.class);
+        } else if (id == R.id.addTopicButton) {
+            // Navigate to the "Subscribe" activity and destroy the currentActivity
+            UIManager.loadNextActivityAndClear(this, SubscribeActivity.class);
+        } else if (id == R.id.notificationButton) {
+            // Navigate to the "Notification" activity
+            UIManager.loadNextActivity(this, NotificationActivity.class);
+        } else if (id == R.id.aboutAppButton) {
             // Navigate to the "About App" activity
             UIManager.loadNextActivity(this, AboutAppActivity.class);
         }

@@ -20,7 +20,7 @@ public class AboutAppActivity extends AppCompatActivity {
      *                           this contains the saved data. Otherwise, it is null.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aboutapp);
     }
