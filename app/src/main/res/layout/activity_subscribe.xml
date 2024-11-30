@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:background="@drawable/rounded_corners"
+                    android:background="@null"
                     android:contentDescription="@string/dashboardSelected"
                     android:src="@drawable/subscribe_button" />
 
@@ -101,25 +101,24 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
-        android:padding="5dp"
-        android:layout_marginTop="10sp">
+        android:gravity="center"
+        android:padding="8dp">
 
         <ImageButton
             android:id="@+id/dashboardButton"
-            android:layout_width="180dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="@string/dashboardSelected"
-            android:src="@drawable/dashboard_button" />
+            android:src="@drawable/dashboard_button"/>
 
         <ImageButton
-            android:id="@+id/subscribePage"
-            android:layout_width="180dp"
+            android:id="@+id/subscribePageselect"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="@string/subscribe"
-            android:src="@drawable/subscribe" />
-
+            android:src="@drawable/subscribeselect" />
     </LinearLayout>
 
 </LinearLayout>
