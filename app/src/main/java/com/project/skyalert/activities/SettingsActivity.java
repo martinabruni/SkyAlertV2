@@ -2,6 +2,7 @@ package com.project.skyalert.activities;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +34,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         ImageButton addTopicButton = findViewById(R.id.addTopicButton);
         ImageButton notificationButton = findViewById(R.id.notificationButton);
         ImageButton aboutAppButton = findViewById(R.id.aboutAppButton);
+        Button exitButton = findViewById(R.id.exitButton);
 
         // Set click listeners for buttons
         changeBrokerButton.setOnClickListener(this);
         addTopicButton.setOnClickListener(this);
         notificationButton.setOnClickListener(this);
         aboutAppButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
     }
 
     /**
@@ -63,6 +66,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         } else if (id == R.id.aboutAppButton) {
             // Navigate to the "About App" activity
             UIManager.loadNextActivity(this, AboutAppActivity.class);
+        } else if (id == R.id.exitButton) {
+            // Navigate to the "Screen2" activity and destroy the currentActivity
+            UIManager.loadNextActivityAndClear(this, Screen2Activity.class);
         }
     }
 }

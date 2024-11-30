@@ -45,12 +45,14 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         Button disconnectButton = findViewById(R.id.disconnectButton);
         ImageButton subscribePage = findViewById(R.id.subscribePage);
         ImageButton settingsButton = findViewById(R.id.settingsIcon);
+        ImageButton filtersButton = findViewById(R.id.filterIcon);
 
         // Set click listeners for buttons
         clearButton.setOnClickListener(this);
         disconnectButton.setOnClickListener(this);
         subscribePage.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
+        filtersButton.setOnClickListener(this);
 
         // Initialize MQTT handler
         NotificationHelper notificationHelper = new NotificationHelper(this);
@@ -71,7 +73,7 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
 
             // Create a new AlertItem for the received message
             AlertItem newAlert = new AlertItem("", message, topic);
-            if(isError)
+            if (isError)
                 // Update the UI on the main thread
                 runOnUiThread(() -> UIManager.displayElements(List.of(newAlert), alertsScrollView, this, R.layout.alert_item, alertBinder));
             else
@@ -112,6 +114,9 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         } else if (id == R.id.settingsIcon) {
             //Navigate to the settings activity
             UIManager.loadNextActivity(currentActivity, SettingsActivity.class);
+        } else if (id == R.id.filterIcon) {
+            //Navigate to the filters activity
+            UIManager.loadNextActivity(currentActivity, FiltersActivity.class);
         }
     }
 }
