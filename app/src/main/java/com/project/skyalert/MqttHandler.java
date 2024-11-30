@@ -43,7 +43,7 @@ public class MqttHandler {
          * @param topic   The topic of the received message.
          * @param message The message payload.
          */
-        void onMessageReceived(String topic, String message);
+        void onMessageReceived(String topic, String message, Boolean isError);
     }
 
     /**
@@ -86,7 +86,7 @@ public class MqttHandler {
      */
     protected void notifyObservers(String topic, String message, Boolean isError) {
         for (MessageListener listener : listeners) {
-            listener.onMessageReceived(topic, message);
+            listener.onMessageReceived(topic, message, isError);
         }
         if (isError) {
             notificationHelper.sendNotification("Sky Alert", message);

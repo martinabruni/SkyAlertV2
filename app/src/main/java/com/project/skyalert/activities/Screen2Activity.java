@@ -57,7 +57,7 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper);
 
         // Add an observer to handle incoming MQTT messages
-        mqttHandlerFacade.addObserver((topic, message) -> {
+        mqttHandlerFacade.addObserver((topic, message, isError) -> {
             // Define how the AlertItem data is bound to views
             ViewBinder<AlertItem> alertBinder = (view, elementData) -> {
                 TextView dataTextView = view.findViewById(R.id.dataTextView);
@@ -71,9 +71,11 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
 
             // Create a new AlertItem for the received message
             AlertItem newAlert = new AlertItem("", message, topic);
-
-            // Update the UI on the main thread
-            runOnUiThread(() -> UIManager.displayElements(List.of(newAlert), alertsScrollView, this, R.layout.alert_item, alertBinder));
+            if(isError)
+                // Update the UI on the main thread
+                runOnUiThread(() -> UIManager.displayElements(List.of(newAlert), alertsScrollView, this, R.layout.alert_item, alertBinder));
+            else
+                runOnUiThread(() -> UIManager.displayElements(List.of(newAlert), alertsScrollView, this, R.layout.orange_alert_item, alertBinder));
         });
     }
 
