@@ -1,7 +1,5 @@
 package com.project.skyalert;
 
-import android.content.Context;
-
 import org.eclipse.paho.mqttv5.client.IMqttToken;
 import org.eclipse.paho.mqttv5.client.MqttClient;
 import org.eclipse.paho.mqttv5.client.MqttConnectionOptions;
@@ -21,15 +19,19 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * The MqttHandler class provides functionality for connecting to an MQTT broker,
- * subscribing to topics, and processing incoming messages.
+ * The MqttHandler class provides core functionality for connecting to an MQTT broker,
+ * managing subscriptions, handling incoming messages, and notifying observers about received data.
  */
+
 public class MqttHandler {
 
     private MqttClient client; // The MQTT client instance
     private final List<MessageListener> listeners = new CopyOnWriteArrayList<>(); // List of observers
     private final NotificationHelper notificationHelper; // Helper for sending notifications
-    private JSONObject lastMessage; // Stores the last received message
+
+    public MqttClient getClient() {
+        return client;
+    }
 
     /**
      * Interface for observing MQTT message events.
@@ -41,7 +43,7 @@ public class MqttHandler {
          * @param topic   The topic of the received message.
          * @param message The message payload.
          */
-        void onMessageReceived(String topic, String message);
+        void onMessageReceived(String topic, String message, Boolean isError);
     }
 
     /**
@@ -54,10 +56,11 @@ public class MqttHandler {
     }
 
     /**
-     * Adds a new observer to listen for incoming MQTT messages.
+     * Adds a listener to observe MQTT message events.
      *
-     * @param listener The listener to add.
+     * @param listener The listener to be added to the observer list.
      */
+
     public void addObserver(MessageListener listener) {
         if (!listeners.contains(listener)) {
             listeners.add(listener);
@@ -65,10 +68,11 @@ public class MqttHandler {
     }
 
     /**
-     * Removes an existing observer from the list.
+     * Removes a listener from observing MQTT message events.
      *
-     * @param listener The listener to remove.
+     * @param listener The listener to be removed from the observer list.
      */
+
     public void removeObserver(MessageListener listener) {
         listeners.remove(listener);
     }
@@ -82,7 +86,7 @@ public class MqttHandler {
      */
     protected void notifyObservers(String topic, String message, Boolean isError) {
         for (MessageListener listener : listeners) {
-            listener.onMessageReceived(topic, message);
+            listener.onMessageReceived(topic, message, isError);
         }
         if (isError) {
             notificationHelper.sendNotification("Sky Alert", message);
@@ -90,13 +94,14 @@ public class MqttHandler {
     }
 
     /**
-     * Connects to an MQTT broker.
+     * Connects to the specified MQTT broker with the provided client ID and context.
      *
      * @param brokerUrl The URL of the MQTT broker.
-     * @param clientId  A unique client identifier.
-     * @param context   The context for managing lifecycle events.
+     * @param clientId  The unique identifier for the MQTT client.
+     * @throws MqttException If there is an issue during the connection process.
      */
-    public void connect(String brokerUrl, String clientId, Context context) {
+
+    public void connect(String brokerUrl, String clientId) throws MqttException {
         try {
             client = new MqttClient(brokerUrl, clientId, new MemoryPersistence());
             MqttConnectionOptions options = new MqttConnectionOptions();
@@ -146,15 +151,16 @@ public class MqttHandler {
 
             client.connect(options);
         } catch (MqttException e) {
-            e.printStackTrace();
+            throw new MqttException(e);
         }
     }
 
     /**
-     * Subscribes to an MQTT topic.
+     * Subscribes the client to the specified MQTT topic.
      *
      * @param topic The topic to subscribe to.
      */
+
     public void subscribe(String topic) {
         try {
             MqttSubscription subscription = new MqttSubscription(topic);
@@ -165,8 +171,9 @@ public class MqttHandler {
     }
 
     /**
-     * Disconnects from the MQTT broker.
+     * Disconnects the client from the MQTT broker.
      */
+
     public void disconnect() {
         try {
             if (client != null && client.isConnected()) {

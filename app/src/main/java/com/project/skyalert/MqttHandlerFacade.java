@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * The MqttHandlerFacade class is a singleton that extends {@link MqttHandler} to provide
- * additional functionality for managing MQTT topics and connections.
+ * MqttHandlerFacade is a singleton class that extends the functionality of {@link MqttHandler},
+ * providing additional utilities for managing MQTT topics and validating connections.
  */
+
 public class MqttHandlerFacade extends MqttHandler {
 
     private static MqttHandlerFacade instance; // Singleton instance
@@ -75,21 +76,22 @@ public class MqttHandlerFacade extends MqttHandler {
     }
 
     /**
-     * Validates the provided IP address and port, then attempts to connect to the MQTT broker.
+     * Validates an IP address and port, then establishes a connection to the MQTT broker.
      *
-     * @param component The UI component to update with connection status messages.
-     * @param ipAddress The IP address of the MQTT broker.
-     * @param port      The port of the MQTT broker.
-     * @param context   The context for managing connection lifecycle.
-     * @throws RuntimeException If the IP address is invalid or the connection fails.
+     * @param component UI component to display connection status.
+     * @param ipAddress IP address of the broker.
+     * @param port      Port number of the broker.
+     * @param context   Android context for connection.
+     * @throws RuntimeException If validation fails or connection cannot be established.
      */
+
     public void validateAndConnect(TextView component, String ipAddress, String port, Context context) {
         if (!isValidIpAddress(ipAddress)) {
             throw new RuntimeException("IP address not valid");
         } else {
             try {
                 String brokerUrl = "tcp://" + ipAddress + ":" + port;
-                connect(brokerUrl, clientId, context);
+                connect(brokerUrl, clientId);
             } catch (Exception e) {
                 throw new RuntimeException("Connection to the broker failed");
             }
@@ -97,10 +99,10 @@ public class MqttHandlerFacade extends MqttHandler {
     }
 
     /**
-     * Subscribes to a given topic and adds it to the list of subscribed topics.
+     * Subscribes to the given MQTT topic and updates the topic list.
      *
-     * @param topic     The MQTT topic to subscribe to.
-     * @param topicItem A {@link TopicItem} representing the subscribed topic.
+     * @param topic     The topic to subscribe to.
+     * @param topicItem The UI representation of the topic.
      */
     public void subscribe(String topic, TopicItem topicItem) {
         super.subscribe(topic);
@@ -116,5 +118,11 @@ public class MqttHandlerFacade extends MqttHandler {
     private boolean isValidIpAddress(String ipAddress) {
         String ipPattern = "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$";
         return ipAddress != null && ipAddress.matches(ipPattern);
+    }
+
+    @Override
+    public void disconnect() {
+        super.disconnect();
+        instance = null;
     }
 }

@@ -27,6 +27,10 @@
         <activity android:name=".activities.Screen1Activity" />
         <activity android:name=".activities.Screen2Activity" />
         <activity android:name=".activities.SubscribeActivity" />
+        <activity android:name=".activities.SettingsActivity"/>
+        <activity android:name=".activities.AboutAppActivity"/>
+        <activity android:name=".activities.FiltersActivity"/>
+        <activity android:name=".activities.NotificationActivity"/>
     </application>
 
 </manifest>
