@@ -33,34 +33,75 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 
 ---
 
-### Activities
+## Activities
 
-1. **`MainActivity`**
+### 1. **`MainActivity`**
 
-   - The entry point of the app.
-   - Provides the "Connect" button for users to navigate further into the app.
+- **Description**: The entry point of the application.
+- **Functionality**:
+  - Provides the "Connect" button to navigate users to `Screen1Activity`.
+  - Implements edge-to-edge UI for modern Android design.
 
-2. **`Screen1Activity`**
+### 2. **`Screen1Activity`**
 
-   - Allows users to input MQTT connection details (broker IP and port) and establish a connection.
-   - Displays connection status messages.
+- **Description**: Handles the MQTT broker connection setup.
+- **Functionality**:
+  - Allows input of MQTT broker details such as IP and port.
+  - Validates connection details and establishes a connection to the broker.
+  - Displays connection status (success or failure).
+  - Automatically disconnects from the broker upon activity lifecycle changes.
+  - Navigates to `Screen2Activity` on successful connection.
 
-3. **`Screen2Activity`**
+### 3. **`Screen2Activity`**
 
-   - Displays real-time alerts received from MQTT topics.
-   - Provides options to clear alerts, navigate to the subscription page, or disconnect.
+- **Description**: Displays alerts and provides options for further navigation.
+- **Functionality**:
+  - Displays real-time MQTT messages or alerts from subscribed topics.
+  - Allows users to:
+    - Clear all displayed alerts.
+    - Navigate to the `SubscribeActivity` for managing topic subscriptions.
+    - Navigate to `SettingsActivity` or `FiltersActivity`.
+    - Disconnect from the MQTT broker.
+  - Provides error notifications for invalid or problematic messages.
 
-4. **`SettingsActivity`**
+### 4. **`SettingsActivity`**
 
-   - Offers application settings and a button to navigate to the "About App" screen.
+- **Description**: Manages application settings.
+- **Functionality**:
+  - Provides options for:
+    - Changing the MQTT broker settings.
+    - Navigating to `SubscribeActivity` to add new topics.
+    - Configuring notifications in `NotificationActivity`.
+    - Viewing application details in `AboutAppActivity`.
+  - Implements a back-navigation button to exit to the previous screen.
 
-5. **`SubscribeActivity`**
+### 5. **`SubscribeActivity`**
 
-   - Enables users to manage their MQTT subscriptions.
-   - Displays a list of subscribed topics and allows adding new topics.
+- **Description**: Manages MQTT topic subscriptions.
+- **Functionality**:
+  - Displays a list of subscribed topics.
+  - Allows users to subscribe to new topics by entering the topic name.
+  - Updates the displayed topic list dynamically upon subscription.
 
-6. **`AboutAppActivity`**
-   - Displays information about the application, such as version and developers.
+### 6. **`AboutAppActivity`**
+
+- **Description**: Displays information about the application.
+- **Functionality**:
+  - Presents details such as the app version, developer information, and licensing.
+  - Includes an "Exit" button to navigate back to the previous screen.
+
+### 7. **`FiltersActivity`**
+
+- **Description**: Configures alert filters.
+- **Functionality**:
+  - Allows users to define and adjust filters for received MQTT messages or alerts.
+
+### 8. **`NotificationActivity`**
+
+- **Description**: Manages notifications for alerts.
+- **Functionality**:
+  - Displays recent notifications related to MQTT messages.
+  - Provides options to configure notification settings.
 
 ---
 
@@ -104,7 +145,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 
 ### Notifications
 
-- Alerts flagged as important or containing errors are sent as Android notifications for better visibility.
+- Alerts flagged containing errors are sent as Android notifications for better visibility.
 
 ---
 
