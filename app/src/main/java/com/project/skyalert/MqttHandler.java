@@ -170,6 +170,20 @@ public class MqttHandler {
     }
 
     /**
+     * Unsubscribes the client to the specified MQTT topic.
+     *
+     * @param topic The topic to unsubscribe to.
+     */
+
+    public void unsubscribe(String topic) throws MqttException {
+        try {
+            client.unsubscribe(topic);
+        } catch (MqttException e) {
+            throw new MqttException(e);
+        }
+    }
+
+    /**
      * Disconnects the client from the MQTT broker.
      */
 

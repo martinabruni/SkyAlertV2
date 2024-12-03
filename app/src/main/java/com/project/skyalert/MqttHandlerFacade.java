@@ -107,6 +107,16 @@ public class MqttHandlerFacade extends MqttHandler {
     }
 
     /**
+     * Unsubscribes to the given MQTT topic and updates the topic list.
+     *
+     * @param topicItem The UI representation of the topic.
+     */
+    public void unsubscribe(TopicItem topicItem) throws MqttException {
+        super.unsubscribe(topicItem.getName());
+        topics.removeIf(t -> t.isEqualTo(topicItem));
+    }
+
+    /**
      * Validates the provided IP address.
      *
      * @param ipAddress The IP address to validate.

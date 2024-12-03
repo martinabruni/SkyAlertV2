@@ -56,8 +56,21 @@ public class SubscribeActivity extends AppCompatActivity implements View.OnClick
         // Define how TopicItem data is bound to views
         topicBinder = (view, elementData) -> {
             TextView nameTextView = view.findViewById(R.id.topicTextView);
+            ImageButton deleteButton = view.findViewById(R.id.deleteButton); // Match the button ID
+
             nameTextView.setText(elementData.getName());
+
+            // Set up a click listener for the delete button
+            deleteButton.setOnClickListener(v -> {
+                topicLayout.removeView(view); // Remove this specific view from the layout
+                try {
+                    mqttHandlerFacade.unsubscribe(elementData); // Remove the topic from the subscribed list
+                } catch (MqttException e) {
+                    UIManager.setResultMessage(subscriptionResult, e.toString());
+                }
+            });
         };
+
 
         // Display the list of already subscribed topics
         UIManager.displayElements(mqttHandlerFacade.getTopics(), topicLayout, this, R.layout.topic_item, topicBinder);
