@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -85,5 +86,24 @@ public class UIManager {
         for (T element : elementList) {
             showElement(inflater, layoutResourceId, binder, element, scroll);
         }
+    }
+
+    /**
+     * Updates the component text displayed to the user.
+     *
+     * @param component the component to set the text.
+     * @param msg       The message to display.
+     */
+    public static void setResultMessage(TextView component, String msg) {
+        component.setText(msg);
+    }
+
+    /**
+     * Clear the component text displayed to the user.
+     *
+     * @param component the component to set to "".
+     */
+    public static void clearResultMessage(TextView component){
+        setResultMessage(component, "");
     }
 }

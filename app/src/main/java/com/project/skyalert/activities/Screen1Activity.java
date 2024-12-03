@@ -50,7 +50,7 @@ public class Screen1Activity extends AppCompatActivity implements View.OnClickLi
 
         if (mqttHandlerFacade != null) {
             mqttHandlerFacade.disconnect();
-            setConnectionResultMessage("Disconnected");
+            UIManager.setResultMessage(connectionResult, "Disconnected");
         }
     }
 
@@ -68,13 +68,13 @@ public class Screen1Activity extends AppCompatActivity implements View.OnClickLi
             NotificationHelper notificationHelper = new NotificationHelper(this);
             mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
             mqttHandlerFacade.validateAndConnect(ipAddress, port);
-            setConnectionResultMessage("Connected");
+            UIManager.setResultMessage(connectionResult, "Connected");
 
             // Navigate to the next screen
             UIManager.loadNextActivity(this, Screen2Activity.class);
         } catch (Exception e) {
             // Display error message if connection fails
-            setConnectionResultMessage(e.getMessage());
+            UIManager.setResultMessage(connectionResult, e.getMessage());
         }
     }
 
@@ -87,14 +87,5 @@ public class Screen1Activity extends AppCompatActivity implements View.OnClickLi
         if (mqttHandlerFacade != null) {
             mqttHandlerFacade.disconnect();
         }
-    }
-
-    /**
-     * Updates the connection result message displayed to the user.
-     *
-     * @param msg The message to display.
-     */
-    private void setConnectionResultMessage(String msg) {
-        this.connectionResult.setText(msg);
     }
 }
