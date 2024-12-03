@@ -1,6 +1,8 @@
 package com.project.skyalert.activities;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +12,7 @@ import com.project.skyalert.R;
  * The NotificationActivity class provides a screen for displaying notifications
  * related to the application's alerts and updates.
  */
-public class NotificationActivity extends AppCompatActivity {
+public class NotificationActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * Called when the activity is first created.
@@ -23,5 +25,20 @@ public class NotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+
+        // Initialize UI components
+        Button exitButton = findViewById(R.id.exitNotification);
+
+        // Set click listeners for buttons
+        exitButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.exitNotification) {
+            // Go back to previous screen
+            finish();
+        }
     }
 }
