@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/filtersPanel"
     android:layout_width="254dp"
-    android:layout_height="348dp"
+    android:layout_height="450dp"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="@drawable/panel_background">
@@ -270,4 +270,18 @@
             android:contentDescription="@string/bottone"
             android:src="@drawable/orologio" />
     </LinearLayout>
+    <Button
+        android:id="@+id/exitFilters"
+        android:layout_width="110dp"
+        android:layout_height="49dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttonstart"
+        android:fontFamily="@font/alegreya_sans"
+        android:text="@string/button_exit"
+        android:tint="@null"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
 </LinearLayout>

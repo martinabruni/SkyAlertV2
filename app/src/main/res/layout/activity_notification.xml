@@ -180,4 +180,18 @@
     </LinearLayout>
 
 </LinearLayout>
+    <Button
+        android:id="@+id/exitNotification"
+        android:layout_width="110dp"
+        android:layout_height="49dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttonstart"
+        android:fontFamily="@font/alegreya_sans"
+        android:text="@string/button_exit"
+        android:tint="@null"
+        android:gravity="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
 </LinearLayout>
