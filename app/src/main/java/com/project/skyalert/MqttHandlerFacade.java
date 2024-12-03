@@ -1,4 +1,5 @@
 package com.project.skyalert;
+
 import com.project.skyalert.ui.layouts.TopicItem;
 
 import java.util.ArrayList;

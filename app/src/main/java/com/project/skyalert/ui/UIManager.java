@@ -26,12 +26,26 @@ public class UIManager {
         currentActivity.startActivity(intent);
     }
 
+    /**
+     * Navigates from the current activity to the specified next activity
+     * and finishes the current activity to clear it from the back stack.
+     *
+     * @param currentActivity The current activity from which the navigation is initiated.
+     * @param nextActivity    The target activity class to navigate to.
+     */
     public static void loadNextActivityAndClear(AppCompatActivity currentActivity, Class<?> nextActivity) {
         Intent intent = new Intent(currentActivity, nextActivity);
         currentActivity.startActivity(intent);
         currentActivity.finish();
     }
 
+    /**
+     * Navigates from the current activity to the specified next activity,
+     * clearing the entire back stack to ensure no previous activities remain.
+     *
+     * @param currentActivity The current activity from which the navigation is initiated.
+     * @param nextActivity    The target activity class to navigate to.
+     */
     public static void loadNextActivityAndClearStack(AppCompatActivity currentActivity, Class<?> nextActivity) {
         Intent intent = new Intent(currentActivity, nextActivity);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
