@@ -29,22 +29,21 @@ public class MqttHandler {
     private final List<MessageListener> listeners = new CopyOnWriteArrayList<>(); // List of observers
     private final NotificationHelper notificationHelper; // Helper for sending notifications
 
-    public MqttClient getClient() {
-        return client;
-    }
-
     /**
      * Interface for observing MQTT message events.
      */
     public interface MessageListener {
+
         /**
          * Called when a new MQTT message is received.
          *
          * @param topic   The topic of the received message.
          * @param message The message payload.
+         * @param isError Indicates whether the received message represents an error (true if it does, false otherwise).
          */
         void onMessageReceived(String topic, String message, Boolean isError);
     }
+
 
     /**
      * Constructor for MqttHandler.
@@ -126,7 +125,7 @@ public class MqttHandler {
                         boolean isError = hasErrorList(payload);
 
                         if (isError) {
-                            String formattedMessage = handleIncomingMessage(topic, payload);
+                            String formattedMessage = handleIncomingMessage(payload);
                             notifyObservers(topic, formattedMessage, true);
                         } else {
                             notifyObservers(topic, payload, false);
@@ -203,11 +202,10 @@ public class MqttHandler {
     /**
      * Handles incoming MQTT messages and formats error messages if present.
      *
-     * @param topic   The topic of the message.
      * @param payload The message payload.
      * @return A formatted string representation of the message.
      */
-    public String handleIncomingMessage(String topic, String payload) {
+    public String handleIncomingMessage(String payload) {
         try {
             JSONObject message = new JSONObject(payload);
             String name = message.optString("name", "N/A");

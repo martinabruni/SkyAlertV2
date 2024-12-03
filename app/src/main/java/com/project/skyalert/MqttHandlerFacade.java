@@ -1,8 +1,5 @@
 package com.project.skyalert;
 
-import android.content.Context;
-import android.widget.TextView;
-
 import com.project.skyalert.ui.layouts.TopicItem;
 
 import java.util.ArrayList;
@@ -78,16 +75,14 @@ public class MqttHandlerFacade extends MqttHandler {
     /**
      * Validates an IP address and port, then establishes a connection to the MQTT broker.
      *
-     * @param component UI component to display connection status.
      * @param ipAddress IP address of the broker.
      * @param port      Port number of the broker.
-     * @param context   Android context for connection.
      * @throws RuntimeException If validation fails or connection cannot be established.
      */
 
-    public void validateAndConnect(TextView component, String ipAddress, String port, Context context) {
-        if (!isValidIpAddress(ipAddress)) {
-            throw new RuntimeException("IP address not valid");
+    public void validateAndConnect(String ipAddress, String port) {
+        if (!isValidIpAddress(ipAddress) || !isValidPort(port)) {
+            throw new RuntimeException("IP address or port not valid");
         } else {
             try {
                 String brokerUrl = "tcp://" + ipAddress + ":" + port;
@@ -118,6 +113,21 @@ public class MqttHandlerFacade extends MqttHandler {
     private boolean isValidIpAddress(String ipAddress) {
         String ipPattern = "^((25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$";
         return ipAddress != null && ipAddress.matches(ipPattern);
+    }
+
+    /**
+     * Validates the provided port number.
+     *
+     * @param port The port number to validate.
+     * @return {@code true} if the port number is valid, {@code false} otherwise.
+     */
+    private boolean isValidPort(String port) {
+        String portPattern = "^([0-9]{1,5})$";
+        if (port != null && port.matches(portPattern)) {
+            int portNumber = Integer.parseInt(port);
+            return portNumber >= 0 && portNumber <= 65535;
+        }
+        return false;
     }
 
     @Override

@@ -27,7 +27,6 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
 
     private LinearLayout alertsScrollView; // Layout for displaying alerts
     private MqttHandlerFacade mqttHandlerFacade; // MQTT handler for managing broker connections
-    private final AppCompatActivity currentActivity = this; // Reference to the current activity
 
     /**
      * Initializes the activity and sets up the UI components and MQTT observers.
@@ -110,13 +109,13 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
             alertsScrollView.removeAllViewsInLayout();
         } else if (id == R.id.subscribePage) {
             // Navigate to the subscription activity
-            UIManager.loadNextActivity(currentActivity, SubscribeActivity.class);
+            UIManager.loadNextActivity(this, SubscribeActivity.class);
         } else if (id == R.id.settingsIcon) {
             //Navigate to the settings activity
-            UIManager.loadNextActivity(currentActivity, SettingsActivity.class);
+            UIManager.loadNextActivity(this, SettingsActivity.class);
         } else if (id == R.id.filterIcon) {
             //Navigate to the filters activity
-            UIManager.loadNextActivity(currentActivity, FiltersActivity.class);
+            UIManager.loadNextActivity(this, FiltersActivity.class);
         }
     }
 }
