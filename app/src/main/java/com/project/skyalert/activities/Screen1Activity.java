@@ -67,7 +67,7 @@ public class Screen1Activity extends AppCompatActivity implements View.OnClickLi
             // Create a NotificationHelper and initialize MQTT connection
             NotificationHelper notificationHelper = new NotificationHelper(this);
             mqttHandlerFacade = MqttHandlerFacade.getInstance(notificationHelper); // Pass the dependency
-            mqttHandlerFacade.validateAndConnect(connectionResult, ipAddress, port, this);
+            mqttHandlerFacade.validateAndConnect(ipAddress, port);
             setConnectionResultMessage("Connected");
 
             // Navigate to the next screen

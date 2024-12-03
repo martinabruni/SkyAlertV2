@@ -67,8 +67,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             // Navigate to the "About App" activity
             UIManager.loadNextActivity(this, AboutAppActivity.class);
         } else if (id == R.id.exitButton) {
-            // Navigate to the "Screen2" activity and destroy the currentActivity
-            UIManager.loadNextActivityAndClear(this, Screen2Activity.class);
+            // Go back to previous screen
+            finish();
         }
     }
 }
