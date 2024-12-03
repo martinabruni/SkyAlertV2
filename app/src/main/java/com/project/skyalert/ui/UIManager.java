@@ -68,7 +68,7 @@ public class UIManager {
     private static <T> void showElement(LayoutInflater inflater, int layoutResourceId, ViewBinder<T> binder, T element, LinearLayout scroll) {
         View elementView = inflater.inflate(layoutResourceId, scroll, false);
         binder.bindView(elementView, element);
-        scroll.addView(elementView);
+        scroll.addView(elementView, 0);
     }
 
     /**
