@@ -6,6 +6,7 @@
     android:background="@drawable/star_background"
     android:padding="16dp">
 
+    <!-- Shared Header with Telescope Image -->
     <ImageView
         android:id="@+id/telescopeImage"
         android:layout_width="80dp"
@@ -15,95 +16,106 @@
         android:contentDescription="@string/telescopio_description"
         android:src="@drawable/foto_telescopio" />
 
+    <!-- Main Container -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="509dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="1sp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/container_background"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp">
 
+        <!-- Header Section -->
 
-        <TextView
-            android:id="@+id/titleText"
-            android:layout_width="wrap_content"
+        <!-- Divider -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/italiana"
-            android:text="@string/subscribe"
-            android:textColor="@android:color/white"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="1sp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/italiana"
+                android:gravity="center"
+                android:text="@string/subscribe"
+                android:textColor="@android:color/white"
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginVertical="20dp"
             android:background="@android:color/white" />
-
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
             android:padding="8dp">
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/topicInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1sp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_border"
+                android:hint="@string/broker"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:textColorHint="#80FFFFFF" />
+
+            <TextView
+                android:id="@+id/subscriptionResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@android:color/white" />
+
+            <ImageButton
+                android:id="@+id/subscribeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:background="@null"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
+                android:contentDescription="@string/dashboardSelected"
+                android:src="@drawable/subscribe_button" />
+        <!-- Scrollable Content -->
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:padding="8dp">
 
-                <EditText
-                    android:id="@+id/topicInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="1sp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/rounded_border"
-                    android:hint="@string/broker"
-                    android:inputType="textPersonName"
-                    android:padding="10dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="#80FFFFFF" />
-
-                <TextView
-                    android:id="@+id/subscriptionResult"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@android:color/white" />
-
-                <ImageButton
-                    android:id="@+id/subscribeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="@null"
-                    android:contentDescription="@string/dashboardSelected"
-                    android:src="@drawable/subscribe_button" />
-
                 <LinearLayout
-                    android:id="@+id/topicLayout"
+                    android:id="@+id/layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-
-
                 </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
 
-            </LinearLayout>
-        </ScrollView>
 
     </LinearLayout>
 
+    <!-- Navigation Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -117,15 +129,14 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="@string/dashboardSelected"
-            android:src="@drawable/dashboard_button"/>
+            android:src="@drawable/dashboardselect" />
 
         <ImageButton
-            android:id="@+id/subscribePageselect"
+            android:id="@+id/subscribePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="@string/subscribe"
-            android:src="@drawable/subscribeselect" />
+            android:src="@drawable/subscribe" />
     </LinearLayout>
-
 </LinearLayout>
