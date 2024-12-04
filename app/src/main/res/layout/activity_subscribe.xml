@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="@string/dashboardSelected"
-            android:src="@drawable/dashboardselect" />
+            android:src="@drawable/dashboard_button" />
 
         <ImageButton
             android:id="@+id/subscribePage"
@@ -137,6 +137,6 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:contentDescription="@string/subscribe"
-            android:src="@drawable/subscribe" />
+            android:src="@drawable/subscribeselect" />
     </LinearLayout>
 </LinearLayout>
