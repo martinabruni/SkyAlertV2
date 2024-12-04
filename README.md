@@ -5,7 +5,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 ## Features
 
 - **Real-Time Alerts**: Receive instant notifications from subscribed MQTT topics.
-- **Customizable Subscriptions**: Add MQTT topic subscriptions.
+- **Customizable Subscriptions**: Add/Remove MQTT topic subscriptions.
 - **Error Handling**: Detect and display errors in MQTT messages with detailed descriptions.
 - **Notification Support**: Send notifications for important alerts via the Android Notification system.
 - **Intuitive UI**: Simple and responsive UI to manage alerts and subscriptions.
@@ -24,7 +24,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 
 2. **`MqttHandlerFacade`**
 
-   - A singleton extending `MqttHandler` to add functionality like topic management and IP validation.
+   - A singleton extending `MqttHandler` to add functionality like topic management and IP/Port validation.
    - Provides utilities for managing multiple topics and seamless connection handling.
 
 3. **`NotificationHelper`**
@@ -49,7 +49,6 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
   - Allows input of MQTT broker details such as IP and port.
   - Validates connection details and establishes a connection to the broker.
   - Displays connection status (success or failure).
-  - Automatically disconnects from the broker upon activity lifecycle changes.
   - Navigates to `Screen2Activity` on successful connection.
 
 ### 3. **`Screen2Activity`**
@@ -62,7 +61,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
     - Navigate to the `SubscribeActivity` for managing topic subscriptions.
     - Navigate to `SettingsActivity` or `FiltersActivity`.
     - Disconnect from the MQTT broker.
-  - Provides error notifications for invalid or problematic messages.
+  - Provides local notifications for messages containing error_list.
 
 ### 4. **`SettingsActivity`**
 
@@ -81,13 +80,13 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 - **Functionality**:
   - Displays a list of subscribed topics.
   - Allows users to subscribe to new topics by entering the topic name.
+  - Allows users to unsubscribe from a topic clicking on the delete button(X) of a topic item.
   - Updates the displayed topic list dynamically upon subscription.
 
 ### 6. **`AboutAppActivity`**
 
 - **Description**: Displays information about the application.
 - **Functionality**:
-  - Presents details such as the app version, developer information, and licensing.
   - Includes an "Exit" button to navigate back to the previous screen.
 
 ### 7. **`FiltersActivity`**
@@ -100,8 +99,9 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 
 - **Description**: Manages notifications for alerts.
 - **Functionality**:
-  - Displays recent notifications related to MQTT messages.
-  - Provides options to configure notification settings.
+  - Allows user to customize the notifications sound.
+  - Allows user to upload an mp3 file from the their smartphone.
+  - Displays default or uploaded notifications sounds.
 
 ---
 
@@ -136,6 +136,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 1. Navigate to the subscription page (`SubscribeActivity`).
 2. Add topics by entering their names and clicking "Subscribe."
 3. View all subscribed topics in the displayed list.
+4. Remove a topic by clicking on its X button.
 
 ### Viewing Alerts
 
@@ -145,7 +146,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 
 ### Notifications
 
-- Alerts flagged containing errors are sent as Android notifications for better visibility.
+- Alerts containing errors are sent as Android notifications for better visibility.
 
 ---
 
@@ -174,7 +175,7 @@ SkyAlert is an Android application that leverages MQTT protocol to deliver real-
 - **Project Lead**: [Fileni Francesco]
 - **Developers**: [Bruni Martina, Fileni Francesco, Cimarelli Devid]
 - **UI Design**: [Eftimie Daniela, Mabilia Eleonora, Mariotti Elisa]
-- **QA Testing**: [Cimarelli Devid]
+- **QA Testing**: [Cimarelli Devid, Mabilia Eleonora]
 
 ---
 
