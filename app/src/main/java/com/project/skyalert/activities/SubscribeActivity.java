@@ -45,7 +45,7 @@ public class SubscribeActivity extends AppCompatActivity implements View.OnClick
         // Initialize UI components
         ImageButton dashboardButton = findViewById(R.id.dashboardButton);
         ImageButton subscribeButton = findViewById(R.id.subscribeButton);
-        topicLayout = findViewById(R.id.topicLayout);
+        topicLayout = findViewById(R.id.layout);
         topic = findViewById(R.id.topicInput);
         subscriptionResult = findViewById(R.id.subscriptionResult);
 
