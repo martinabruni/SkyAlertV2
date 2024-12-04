@@ -1,5 +1,6 @@
 package com.project.skyalert;
 
+import com.project.skyalert.ui.layouts.AlertItem;
 import com.project.skyalert.ui.layouts.TopicItem;
 
 import org.eclipse.paho.mqttv5.common.MqttException;
@@ -17,6 +18,7 @@ public class MqttHandlerFacade extends MqttHandler {
 
     private static MqttHandlerFacade instance; // Singleton instance
     private List<TopicItem> topics; // List of subscribed topics
+    private List<AlertItem> alerts; // List of subscribed topics
     private final String clientId; // Unique client identifier
 
     /**
@@ -66,12 +68,30 @@ public class MqttHandlerFacade extends MqttHandler {
     }
 
     /**
+     * Retrieves the list of alerts in the dashboard.
+     *
+     * @return A list of {@link AlertItem} objects representing the dashboard's alerts.
+     */
+    public List<AlertItem> getAlerts() {
+        return alerts;
+    }
+
+    /**
      * Updates the list of subscribed topics.
      *
      * @param l The new list of {@link TopicItem} objects.
      */
     public void setTopics(List<TopicItem> l) {
         this.topics = l;
+    }
+
+    /**
+     * Updates the list of dashboard alerts.
+     *
+     * @param a The new list of {@link AlertItem} objects.
+     */
+    public void setAlerts(List<AlertItem> a) {
+        this.alerts = a;
     }
 
     /**
