@@ -72,7 +72,6 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
 
             // Create a new AlertItem for the received message
             AlertItem newAlert = new AlertItem("", message, topic);
-            mqttHandlerFacade.getAlerts().add(newAlert);
             if (isError)
                 // Update the UI on the main thread
                 runOnUiThread(() -> UIManager.displayElements(List.of(newAlert), alertsScrollView, this, R.layout.alert_item, alertBinder));
@@ -90,7 +89,6 @@ public class Screen2Activity extends AppCompatActivity implements View.OnClickLi
         if (mqttHandlerFacade != null) {
             mqttHandlerFacade.disconnect();
             mqttHandlerFacade.setTopics(new ArrayList<>());
-            mqttHandlerFacade.setAlerts(new ArrayList<>());
         }
     }
 
