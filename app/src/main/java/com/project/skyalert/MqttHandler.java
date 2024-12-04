@@ -160,12 +160,26 @@ public class MqttHandler {
      * @param topic The topic to subscribe to.
      */
 
-    public void subscribe(String topic) {
+    public void subscribe(String topic) throws MqttException {
         try {
             MqttSubscription subscription = new MqttSubscription(topic);
             client.subscribe(new MqttSubscription[]{subscription});
         } catch (MqttException e) {
-            e.printStackTrace();
+            throw new MqttException(e);
+        }
+    }
+
+    /**
+     * Unsubscribes the client to the specified MQTT topic.
+     *
+     * @param topic The topic to unsubscribe to.
+     */
+
+    public void unsubscribe(String topic) throws MqttException {
+        try {
+            client.unsubscribe(topic);
+        } catch (MqttException e) {
+            throw new MqttException(e);
         }
     }
 

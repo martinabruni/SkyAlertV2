@@ -2,6 +2,8 @@ package com.project.skyalert;
 
 import com.project.skyalert.ui.layouts.TopicItem;
 
+import org.eclipse.paho.mqttv5.common.MqttException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -99,9 +101,19 @@ public class MqttHandlerFacade extends MqttHandler {
      * @param topic     The topic to subscribe to.
      * @param topicItem The UI representation of the topic.
      */
-    public void subscribe(String topic, TopicItem topicItem) {
+    public void subscribe(String topic, TopicItem topicItem) throws MqttException {
         super.subscribe(topic);
         this.topics.add(topicItem);
+    }
+
+    /**
+     * Unsubscribes to the given MQTT topic and updates the topic list.
+     *
+     * @param topicItem The UI representation of the topic.
+     */
+    public void unsubscribe(TopicItem topicItem) throws MqttException {
+        super.unsubscribe(topicItem.getName());
+        topics.removeIf(t -> t.isEqualTo(topicItem));
     }
 
     /**
@@ -129,6 +141,22 @@ public class MqttHandlerFacade extends MqttHandler {
         }
         return false;
     }
+
+    /**
+     * Checks if the list contains a TopicItem with the same name as the provided TopicItem.
+     *
+     * @param t the TopicItem to search for in the list
+     * @return {@code true} if a TopicItem with the same name exists in the list, {@code false} otherwise
+     */
+    public boolean topicListContains(TopicItem t) {
+        for (TopicItem topic : topics) {
+            if (topic.isEqualTo(t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public void disconnect() {
